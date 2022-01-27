@@ -1,0 +1,50 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(72, 79, 81);
+}
+#logo {
+    width: 30%;
+    margin: 2%;
+}
+#signInButton {
+    margin: 2%;
+}
+#signInButton button {
+    border-radius: 20px;
+    padding: 2vw;
+}
+#searchbar {
+    margin-top: 5%;
+    width: 70%;
+    height: 3%;
+    margin-left: 15%;
+    border-radius: 20px;
+    padding-left: 10px;
+}
+#categories {
+    display: grid;
+    margin: 10px;
+}
+h1 {
+    border-bottom: solid;
+    padding: 5px 0px;
+}
+h2 {
+    border-bottom: solid;
+    margin: 0;
+    padding: 20px 0px;
+}
+footer {
+    position: relative;
+    padding: 10px;
+    margin-top: 10%;
+    bottom: 0;
+    width: 100%;
+    border-top: solid;
+}
