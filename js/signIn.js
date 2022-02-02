@@ -1,6 +1,10 @@
-import { getAuth, signInWithEmailAndPassword, signOut } from "./firebase";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "./firebase";
 
 const auth = getAuth();
+auth.onAuthStateChanged(auth, user => {
+    window.location.href = `./index.html`;
+});
+
 signIn = () => {
     let email = document.getElementById("emailEntry");
     let password = document.getElementById("passwordEntry");
@@ -16,6 +20,7 @@ signIn = () => {
             const errorMessage = error.message;
             console.log(String(errorCode).concat(": ", String(errorMessage)));
           });
+
 }
 
 signOut = () => {
