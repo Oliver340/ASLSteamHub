@@ -1,4 +1,4 @@
 .suo
-.json
+*.json
 .sqlite
 .env.local
