@@ -1,0 +1,25 @@
+#loginContainer {
+    border-radius: 20px;
+    padding: 4vmin;
+    background-color: rgb(244,244,244);
+    display: flex;
+    flex-direction: column;
+    margin: 15vmin;
+}
+#loginContainer > * {
+    margin: 2vmin;
+}
+
+#loginContainer > input {
+    padding: 3vmin;
+    background-color: rgb(172,175,185);
+}
+
+#loginContainer > button {
+    border-radius: 20px;
+    width: 100px;
+    margin: 2%;
+    padding: 2vmin;
+    align-self: center;
+    background-color: rgb(172,175,185);
+}

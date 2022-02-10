@@ -21,10 +21,8 @@ const server = express();
 const port = 4757;
 const updir = '..';
 
-server.use('/html', express.static(path.join(__dirname, "html")));
-server.use('/css', express.static(path.join(__dirname, "css")));
-server.use('/images', express.static(path.join(__dirname, "images")));
-server.use('/js', express.static(path.join(__dirname, "js")));
+server.use('/public', express.static(path.join(__dirname, "public")));
+
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
@@ -35,7 +33,11 @@ server.engine('html', require('ejs').renderFile);
 
 server.get('/', (req, res) => {
   // looks in base path /views by default, either change filedir or do it like this
-  res.render(updir + '/html/index.html');
+  res.render(updir + '/public/index.html');
+});
+
+server.get('/signin', (req, res) => {
+  res.render(updir + '/public/signIn.html');
 });
 
 

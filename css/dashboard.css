@@ -1,0 +1,23 @@
+#listContent {
+    display: grid;
+    margin: 10px;
+}
+h1 {
+    border-bottom: solid;
+    padding: 5px 0px;
+}
+h2 {
+    border-bottom: solid;
+    margin: 0;
+    padding: 20px 0px;
+}
+#listContainer {
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+}
+#listContainer > * {
+    margin: 2vmin;
+}

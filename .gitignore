@@ -2,4 +2,4 @@
 *.json
 .sqlite
 .env.local
-./keys
+node_modules
