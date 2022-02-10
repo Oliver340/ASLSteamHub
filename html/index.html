@@ -1,0 +1,42 @@
+<!-- Page where you would have the list of categories. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <script src="../js/firebase.js"></script>
+    <script src="../js/dropDown.js"></script>
+</head>
+<body>
+    <header>
+        <image id="logo" src="../images/logo.png" alt="logoImage"></image>
+
+        <nav id="dropDown">
+            <img id="menuIcon" src="../images/menuicon.png" alt="menuIconImage"/>
+            <div id="dropDownContent">
+                <div class="options">Profile</div>
+                <div class="options">Your Lists</div>
+                <div class="options">Submit Word</div>
+                <div class="options">Sign Out</div>
+            </div>
+        </nav>
+    </header>
+    
+    
+    <input id="searchbar" type="text" placeholder="Search...">
+    <div id="categories">
+        <h1>Categories</h1>
+        <h2><a>Physics</a></h2>
+        <h2><a>Chemistry</a></h2>
+        <h2><a>Biology</a></h2>
+        <h2><a>Engineering</a></h2>
+        <h2><a>Computer Science</a></h2>
+        <h2><a>Architecture</a></h2>
+    </div>
+
+    <footer>Contact Us</footer>
+</body>
+</html>

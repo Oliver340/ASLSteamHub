@@ -1,0 +1,5 @@
+.suo
+*.json
+.sqlite
+.env.local
+node_modules
