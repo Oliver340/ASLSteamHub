@@ -5,9 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Submission</title>
+    <script src="../js/dropDown.js"></script>
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/wordSubmission.css">
     <script src="../js/firebase.js"></script>
 </head>
 <body>
+    <header>
+        <image id="logo" src="../images/logo.png" alt="logoImage"></image>
+
+        <nav id="dropDown">
+            <img id="menuIcon" src="../images/menuicon.png" alt="menuIconImage"/>
+            <div id="dropDownContent">
+                <div class="options">Profile</div>
+                <div class="options">Your Lists</div>
+                <div class="options">Submit Word</div>
+                <div class="options">Sign Out</div>
+            </div>
+        </nav>
+    </header>
+
+    
+    <div id="wordSubmissionContainer">
+        <input id="wordEntry" type="text" placeholder="Enter New Word">
+        <input id="linkEntry" type="text" placeholder="Enter Link of ASL Sign">
+        <input id="definitionEntry" type="text" placeholder="Definition of Word">
+        <button type="button">Add to Dictionary</button>
+    </div>
     
 </body>
 </html>

@@ -28,7 +28,10 @@
 
     <div id="listContent">
         <h1>Username</h1>
-        <h2 onclick="dropDownList()">Your Lists</h2>
+        <div id="yourLists">
+            <h2 onclick="dropDownList()">Your Lists</h2>
+            <img onclick="dropDownList()" id="dropDownArrow" src="../images/droparrow.png" alt="dropDownArrow"/>
+        </div>
         <div id="listContainer">
             <button>add list</button>
             <div class="lists">List 1</div>
