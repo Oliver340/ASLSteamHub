@@ -14,9 +14,6 @@
     padding: 3vmin;
     background-color: rgb(172,175,185);
 }
-::placeholder {
-    color: black;
-}
 
 #loginContainer > button {
     border-radius: 20px;

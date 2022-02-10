@@ -5,6 +5,7 @@ html, body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+	min-width: 100vw;
 }
 header {
     display: flex;
@@ -30,6 +31,18 @@ footer {
     width: 100%;
     border-top: solid;
 }
+::placeholder {
+    color: black;
+}
+#searchbar {
+    margin-top: 5%;
+    width: 70%;
+    height: 3%;
+    margin-left: 15%;
+    border-radius: 20px;
+    padding-left: 10px;
+}
+
 
 
 
@@ -81,8 +94,5 @@ footer {
 		padding: 5%;
 		font-size: 5vw;
 		margin: 15%;
-	}
-	#dropDown:hover #dropDownContent {
-		display: block;
 	}
 }

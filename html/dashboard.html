@@ -6,8 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="../js/firebase.js"></script>
+    <script src="../js/dropDown.js"></script>
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
+    <header>
+        <image id="logo" src="../images/logo.png" alt="logoImage"></image>
+
+        <nav id="dropDown">
+            <img id="menuIcon" src="../images/menuicon.png" alt="menuIconImage"/>
+            <div id="dropDownContent">
+                <div class="options">Profile</div>
+                <div class="options">Your Lists</div>
+                <div class="options">Submit Word</div>
+                <div class="options">Sign Out</div>
+            </div>
+        </nav>
+    </header>
+    
+
+    <div id="listContent">
+        <h1>Username</h1>
+        <h2 onclick="dropDownList()">Your Lists</h2>
+        <div id="listContainer">
+            <button>add list</button>
+            <div class="lists">List 1</div>
+            <div class="lists">List 2</div>
+            <div class="lists">List 3</div>
+        </div>
+    </div>
+
+
+    <footer>Contact Us</footer>    
     
 </body>
 </html>
