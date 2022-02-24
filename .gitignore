@@ -3,3 +3,4 @@
 .sqlite
 .env.local
 node_modules
+./keys
