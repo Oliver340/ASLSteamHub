@@ -1,20 +1,6 @@
 //*******SETUP PORTION*******//
 
 // Import the functions you need from the SDKs you need
-const { initializeApp } = require("firebase/app");
-const { getFirestore, collection, getDocs } = require("firebase/firestore/lite");
-//const { getAnalytics } = require("firebase/analytics");
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = require('./keys/firebaseconfig.json');
-
-// Initialize Firebase
-const firebaseapp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseapp);
-//const analytics = getAnalytics(firebaseapp);
 const express = require('express');
 const path = require('path');
 const server = express();
