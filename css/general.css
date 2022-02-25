@@ -16,6 +16,10 @@ header {
     width: 40vmin;
     margin: 2%;
 }
+#homeIcon {
+    width: 10vmin;
+    margin: 2%;
+}
 #signUpButton {
     margin: 2%;
     border-radius: 20px;
@@ -28,6 +32,7 @@ footer {
     margin-top: 20px;
     width: 100%;
     border-top: solid;
+	position: fixed;
 }
 ::placeholder {
     color: black;
@@ -45,7 +50,7 @@ footer {
 
 
 
-
+/* Drop Down Menu */
 #dropDown{
 	position: relative;
 	display: inline-block;
