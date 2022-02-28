@@ -12,6 +12,10 @@
     margin: 2vmin;
 }
 
+header {
+    justify-content: center;
+}
+
 #loginContainer > input {
     padding: 3vmin;
     background-color: rgb(192, 192, 192);
