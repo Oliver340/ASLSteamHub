@@ -1,0 +1,29 @@
+<!-- Page where you would log on (loads dynamically). -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../css/logOn.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <script src="../js/firebase.js"></script>
+</head>
+<body>
+    <header>
+        <image id="logo" src="../images/logo.png"></image>
+    </header>
+    
+    <div id="loginContainer">
+        <input id="usernameEntry" type="text" placeholder="Username">
+        <input id="passwordEntry" type="text" placeholder="Password">
+        <!-- onClick to be changed to logOn() function -->
+        <button type="button" onclick="signIn()">Log on</button>
+        <a href="../html/signIn.html">create new account</a>
+    </div>
+    <img src="../images/videoexample.png" style="width: 50%;margin-left: 25%;margin-top: 2%;">
+
+    <!-- script src to be changed to log on .js file -->
+    <script src="../js/signIn.js"></script>
+</body>
+</html>
