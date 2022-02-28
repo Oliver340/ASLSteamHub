@@ -4,13 +4,16 @@ html, body {
     margin: 0;
     min-height: 100vh;
 	min-width: 100vw;
+	background: rgb(100,102,107);
+	background: linear-gradient(180deg, rgba(100,102,107,1) 25%, rgba(113,115,119,1) 31%, rgba(137,139,142,1) 43%, rgba(151,152,155,1) 55%, rgba(183,184,185,1) 70%, rgba(201,202,202,1) 85%, rgba(224,224,224,0.31) 100%);
 }
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(72, 79, 81);
+    background-color: #64666b;
 	padding: 10px;
+	height: 20%;
 }
 #logo {
     width: 40vmin;
