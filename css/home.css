@@ -3,6 +3,9 @@
     grid-template-areas: 
     "Lists Library"
     "Settings FAQ";
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+
     margin: auto;
     padding: 5%;
     width: 80vmin;
@@ -17,6 +20,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    filter: drop-shadow(3px 3px 4px);
+    cursor:pointer;
+
+    font-size: 2em;
 }
 #lists {
     grid-area: Lists;
@@ -32,15 +40,13 @@
 }
 h1 {
     border-bottom: solid;
-    padding: 2% 5% 5% 10%;
-}
-
-#categories > * {
-    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-    filter: drop-shadow(3px 3px 4px);
-    cursor:pointer;
+    padding: 1vmin 2vmin 2vmin 10vmin;
 }
 #lists:active, #library:active, #settings:active, #FAQ:active {
     color:white;
     box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+
+#settingsIcon, #FAQIcon {
+    width: 75px;
 }
