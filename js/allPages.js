@@ -93,10 +93,14 @@ onAuthStateChanged(auth, (user) => {
 
 const loginForm = document.querySelector("#login");
 
-loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let user = login(loginForm.emailEntry.value, loginForm.passwordEntry.value);
-    console.log(user);
-})
+if (loginForm != null) {
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let user = login(loginForm.emailEntry.value, loginForm.passwordEntry.value);
+        console.log(user);
+    })
+}
+
+signUpForm.addEventListener();
 
 //export { createNewUser, logout, login, deleteDocumentFromCollection, getDocumentsFromCollection };
