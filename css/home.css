@@ -38,15 +38,11 @@
 #FAQ {
     grid-area: FAQ;
 }
-h1 {
-    border-bottom: solid;
-    padding: 1vmin 2vmin 2vmin 10vmin;
-}
 #lists:active, #library:active, #settings:active, #FAQ:active {
     color:white;
     box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
 }
 
-#settingsIcon, #FAQIcon {
+#settingsIcon, #FAQIcon, #listIcon, #libraryIcon {
     width: 75px;
 }

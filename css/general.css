@@ -45,57 +45,8 @@ footer {
     border-radius: 20px;
     padding-left: 10px;
 }
-
-
-
-
-
-/* Drop Down Menu */
-#dropDown{
-	position: relative;
-	display: inline-block;
-	cursor: pointer;
-}
-#dropDownContent{
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	width: 60vw;
-	right: 1vw;
-}
-#menuIcon{
-	display: none;
-}
-.options{
-	padding: 1%;
-	border-radius: 15px;
-	font-size: 2em;
-}
-.options:hover{
-	background-color: grey;
-	color: white;
-}
-@media only screen and (max-width: 1000px) {
-	#dropDownContent{
-		display: none;
-		position: absolute;
-		background-color: rgb(72, 79, 81);
-		width: 33vw;
-		box-shadow: 3px 3px 7px;
-		z-index: 1;
-		margin-right: 1vw;
-		border-radius: 15px;
-	}
-	#menuIcon{
-		display: inline-block;
-		margin-right: 5vw;
-		padding: 2vw;
-		width: 8vw;
-		border-radius: 15px;
-	}
-	.options{
-		padding: 5%;
-		font-size: 5vw;
-		margin: 15%;
-	}
+h1 {
+    border-bottom: solid;
+    padding: 1vmin 2vmin 2vmin 10vmin;
+	font-size: 3em;
 }
