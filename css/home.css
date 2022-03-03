@@ -12,7 +12,7 @@
     height: 70vmin;
 }
 #categories > * {
-    background-color: green;
+    background-color: #c8c9cc;
     align-self: stretch;
     justify-self: stretch;
     margin: 2%;

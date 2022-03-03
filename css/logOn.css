@@ -1,0 +1,43 @@
+
+#loginContainer {
+    border-radius: 20px;
+    padding: 1.5vmin;
+    background-color: rgb(244,244,244);
+    display: flex;
+    flex-direction: column;
+    margin: 15vmin;
+    margin-bottom: 12vmin;
+}
+#loginContainer > * {
+    margin: 2vmin;
+}
+
+header {
+    justify-content: center;
+}
+
+#loginContainer > input {
+    padding: 3vmin;
+    background-color: rgb(192, 192, 192);
+    border-radius: 1em;
+    border-style: solid;
+    border-color: #5c5c5c;
+    border-width: 1.5px;
+}
+
+#loginContainer > button {
+    border-radius: 13px;
+    width: 100px;
+    margin: 2%;
+    padding: 2vmin;
+    align-self: center;
+    background-color: #9da0a6;
+    border-style: solid;
+    border-color: #5c5c5c;
+    border-width: 1.5px;
+}
+
+#loginContainer > a {
+    text-align: center;
+    color: #405a8f;
+}
