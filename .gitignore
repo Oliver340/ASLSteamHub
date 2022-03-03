@@ -1,6 +1,6 @@
 .suo
 *.json
 .sqlite
-.env.local
+.env
 node_modules
 ./keys

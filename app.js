@@ -21,7 +21,7 @@ server.engine('html', require('ejs').renderFile);
 
 server.get('/', (req, res) => {
   // looks in base path /views by default, either change filedir or do it like this
-  res.render(updir + '/html/index.html');
+  res.render(updir + '/html/signIn.html');
 });
 
 
