@@ -1,31 +1,27 @@
-<!-- Page where you would edit your lists. -->
+<!-- Page where it would have your profile and list of lists. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit List</title>
+    <title>List</title>
     <script src="../js/firebase.js"></script>
     <link rel="stylesheet" href="../css/general.css">
-    <link rel="stylesheet" href="../css/editList.css">
+    <link rel="stylesheet" href="../css/library.css">
 </head>
 <body>
-
+    
     <header>
         <image id="logo" src="../images/logo.png" alt="logoImage"></image>
         <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="location.href='home.html';" ></image>
     </header>
 
-    <h1>My Lists</h1>
+    <h1>Library</h1>
 
-    <form>
-        <label for="listName">List Name: </label>
-        <input type="text" id="listName" name="listName" value="List 1">
-    </form>
+    <input id="searchbar" type="text" placeholder="Search...">
     
-    <div id="listContainer">
-        <button id="addWord">+ new word</button>
-    </div>
+    
+    
     
 </body>
 </html>
