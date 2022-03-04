@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>List</title>
+    <script src="../js/firebase.js"></script>
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/lists.css">
 </head>
@@ -17,20 +18,44 @@
 
     <h1>My Lists</h1>
     
-    <div id="listContent">
-        <div id="listContainer">
-            <button>+ new list</button>
-        </div>
+    <div id="listContainer">
+        <button id="addList">+ new list</button>
     </div>
+    
     
 </body>
 <script>
     let num = 0;
-    document.getElementById("listContainer").onclick = function() {
+    document.getElementById("addList").onclick = function() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;//January is 0!`
+
+        var yyyy = today.getFullYear();
+        if(dd<10){dd='0'+dd}
+        if(mm<10){mm='0'+mm}
+        var today = mm+'/'+dd+'/'+yyyy;
         num++;
         let element = document.createElement("div");
         element.className = "lists";
-        element.textContent = "List" + num;
+        element.textContent = "List" + num + " - " + today;
+
+        let image = document.createElement("img");
+        image.id = "mailIcon";
+        image.src = "../images/mailicon.png";
+        image.alt = "mailIcon";
+
+        element.append(image);
+
+        
+        let image2 = document.createElement("img");
+        image2.id = "editIcon";
+        image2.src = "../images/editicon.png";
+        image2.alt = "editIcon";
+        image2.onclick = function() {location.href='editList.html';};
+
+        element.append(image2);
+
         document.getElementById("listContainer").append(element);
     }
 </script>
