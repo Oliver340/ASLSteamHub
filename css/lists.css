@@ -1,17 +1,24 @@
-#listContent {
-    display: grid;
-    margin: 10px;
-    font-size: 1.5em;
-}
 #listContainer {
-    background-color: #f9f9f9;
+    background-color: #c8c9cc;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
+    border-radius: 20px;
+    font-size: 1.5em;
+    margin: 10px;
 }
 #listContainer > * {
     margin: 2vmin;
 }
 #listContainer > button {
     font-size: 1em;
+    background-color: #9da0a6;
+}
+#mailIcon, #editIcon {
+    width: 35px;
+    margin-left: 25px;
+}
+.lists {
+    display: flex;
+    align-items: center;
 }
