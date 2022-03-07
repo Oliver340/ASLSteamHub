@@ -101,6 +101,4 @@ if (loginForm != null) {
     })
 }
 
-signUpForm.addEventListener();
-
 //export { createNewUser, logout, login, deleteDocumentFromCollection, getDocumentsFromCollection };
