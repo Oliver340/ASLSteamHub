@@ -13,15 +13,38 @@
     
     <header>
         <image id="logo" src="../images/logo.png" alt="logoImage"></image>
-        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="location.href='home.html';" ></image>
+        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="location.href='home.html';"></image>
     </header>
 
     <h1>Library</h1>
 
     <input id="searchbar" type="text" placeholder="Search...">
     
-    
+    <div id="libraryContainer">
+        <button id="addWord" onclick="location.href='wordSubmission.html';">+ new word</button>
+        <div class="wordContainer">
+            <h2 id="canada">Canada<image class="addIcon" src="../images/addtofoldericon.png" alt="addIcon"></image></h2>
+            <iframe src="https://www.youtube.com/embed/IA3J6LFtVzY"></iframe>
+            <p class="plainDesc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos nemo eum voluptatem vel! Labore laudantium, excepturi earum, ipsam sunt deserunt, deleniti totam voluptas dignissimos blanditiis natus alias? Quae magnam explicabo numquam amet unde praesentium voluptatum modi enim quis eveniet laudantium incidunt sapiente aut autem in, earum, molestias eaque ipsa omnis natus non vero et porro architecto? Vitae debitis qui nihil cupiditate?</p>
+            <p class="scientificDesc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo alias rem nam tempore voluptate mollitia, natus nisi. Laboriosam cupiditate, provident iste nihil nesciunt pariatur molestias distinctio beatae adipisci earum. Adipisci!</p>
+        </div>
+        <div class="wordContainer">
+            <h2 id="hello">Hello<image class="addIcon" src="../images/addtofoldericon.png" alt="addIcon"></image></h2>
+            <iframe src="https://www.youtube.com/embed/QB44Vddoi-w"></iframe>
+            <p class="plainDesc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos nemo eum voluptatem vel! Labore laudantium, excepturi earum, ipsam sunt deserunt, deleniti totam voluptas dignissimos blanditiis natus alias? Quae magnam explicabo numquam amet unde praesentium voluptatum modi enim quis eveniet laudantium incidunt sapiente aut autem in, earum, molestias eaque ipsa omnis natus non vero et porro architecto? Vitae debitis qui nihil cupiditate?</p>
+            <p class="scientificDesc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo alias rem nam tempore voluptate mollitia, natus nisi. Laboriosam cupiditate, provident iste nihil nesciunt pariatur molestias distinctio beatae adipisci earum. Adipisci!</p>
+        </div>
+    </div>
     
     
 </body>
+<script>
+    const node = document.getElementById("searchbar");
+    node.addEventListener("keyup", ({key}) => {
+        if (key === "Enter") {
+            location.href='#' + node.value.toLowerCase();
+            console.log("enter pressed");
+        }
+    });
+</script>
 </html>
