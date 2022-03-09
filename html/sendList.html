@@ -13,6 +13,20 @@
         <image id="logo" src="../images/logo.png" alt="logoImage"></image>
         <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="location.href='home.html';"></image>
     </header>
+
+    <form id="mailContainer">
+        <input id="subjectEntry" type="text" placeholder="Auto filled with list name">
+        <input id="emailEntry" type="text" placeholder="Email">
+        <input id="messageEntry" type="text" placeholder="Standard message autofilled but editable">
+        <button id="sendEmail" type="button">Send</button>
+    </form>
     
 </body>
+<script>
+    document.getElementById("sendEmail").onclick = function() {
+        window.open("mailto:" + document.getElementById("emailEntry").value + "?subject="
+        + document.getElementById("subjectEntry").value + "&body=" + document.getElementById("messageEntry").value
+        + "some link to the list or something here");
+    }
+</script>
 </html>
