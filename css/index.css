@@ -1,0 +1,13 @@
+#categories {
+    display: grid;
+    margin: 10px;
+}
+h1 {
+    border-bottom: solid;
+    padding: 5px 0px;
+}
+h2 {
+    border-bottom: solid;
+    margin: 0;
+    padding: 20px 0px;
+}
