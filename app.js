@@ -4,7 +4,6 @@
 const express = require('express');
 const path = require('path');
 const server = express();
-const port = 4757;
 const updir = '..';
 
 server.use('/html', express.static(path.join(__dirname, "html")));
@@ -35,6 +34,6 @@ server.post('/api/signup', (req, res) => {
   res.send({ help: false });
 });
 
-server.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+// server.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`);
+// });
