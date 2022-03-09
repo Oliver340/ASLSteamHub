@@ -17,7 +17,7 @@
     <form id="mailContainer">
         <input id="subjectEntry" type="text" placeholder="Auto filled with list name">
         <input id="emailEntry" type="text" placeholder="Email">
-        <input id="messageEntry" type="text" placeholder="Standard message autofilled but editable">
+        <textarea id="messageEntry" type="text" placeholder="Standard message autofilled but editable"></textarea>
         <button id="sendEmail" type="button">Send</button>
     </form>
     
@@ -25,7 +25,7 @@
 <script>
     document.getElementById("sendEmail").onclick = function() {
         window.open("mailto:" + document.getElementById("emailEntry").value + "?subject="
-        + document.getElementById("subjectEntry").value + "&body=" + document.getElementById("messageEntry").value
+        + document.getElementById("subjectEntry").value + "&body=" + document.getElementById("messageEntry").value.replace(/\n\r?/g, '%0D%0A')
         + "some link to the list or something here");
     }
 </script>
