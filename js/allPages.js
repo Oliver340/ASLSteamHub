@@ -2,16 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, CollectionReference } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
-//Yes this isn't stored correctly, no I didn't fix this, yes I could have with the time I had, I just chose to not fail other classes
-const firebaseConfig = {
-    // "apiKey" : "AIzaSyBH0J5yRoKq8979s2zhHM8Mdpt7t0ik_cQ",
-    // "authDomain" : "aslsteamhub-bced8.firebaseapp.com",
-    // "projectId" : "aslsteamhub-bced8",
-    // "storageBucket" : "aslsteamhub-bced8.appspot.com",
-    // "messagingSenderId" : "763735607907",
-    // "appId" : "1:763735607907:web:270c1098ba2319379c8656",
-    // "measurementId" : "G-2JP7Q1BN9V"
 
+const firebaseConfig = {
     apiKey : process.env.FIREBASE_API_KEY,
     authDomain : process.env.FIREBASE_AUTH_DOMAIN,
     projectId : process.env.FIREBASE_PROJECT_ID,
@@ -35,8 +27,8 @@ const publishedReference = collection(db, publishedCollection);
 const adminReference = collection(db, adminCollection);
 
 //Get all the documents within a collection
-let getDocumentsFromCollection = function(collectionReference) {
-    getDocs(collectionName)
+let getDocumentsFromCollection = function(collectionName) {
+    getDocs(collection(db, collectionName))
         .then((snapshot) => {
             let documents = [];
             snapshot.docs.forEach((doc) => {
@@ -118,11 +110,16 @@ if (signUpForm != null) {
     signUpForm.addEventListener("submit", (e) => {
         e.preventDefault();
         if (signUpForm.passwordEntry.value == signUpForm.confirmPasswordEntry.value) {
-            let user = createNewUser(signUpForm.emailEntry.value, signUpForm.passwordEntry.value);
-            addDocumentToCollection("Users", {
-                uid: user.uid,
-                name: signUpForm.fullName.value,
-                admin: false
+            createUserWithEmailAndPassword(auth, signUpForm.emailEntry.value, signUpForm.passwordEntry.value)
+            .then((userCredentials) => {
+                addDocumentToCollection("Users", {
+                    uid: userCredentials.user.uid,
+                    name: signUpForm.fullName.value,
+                    admin: false
+                });
+            })
+            .catch((err) => {
+                console.log(err.message);
             });
         }
     })
