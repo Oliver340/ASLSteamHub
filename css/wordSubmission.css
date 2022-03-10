@@ -10,9 +10,14 @@
     margin: 2vmin;
 }
 
-#wordSubmissionContainer > input {
+#wordSubmissionContainer > input, #wordSubmissionContainer > textarea {
     padding: 3vmin;
     background-color: rgb(172,175,185);
+}
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    border-style: inset;
+    border-width: 2px;
 }
 
 #wordSubmissionContainer > button {
