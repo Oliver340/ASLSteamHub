@@ -35,7 +35,7 @@ header {
 #signUp > input[type="submit"] {
     border-radius: 13px;
     width: auto;
-    margin: 1.5vmin;
+    margin: 4vmin;
     padding: 2vmin;
     align-self: center;
     background-color: #9da0a6;
@@ -48,4 +48,6 @@ header {
     text-align: center;
     color: #405a8f;
     font-size: larger;
+    margin-top: 2.5vmin;
+    margin-bottom: 2vmin;
 }
