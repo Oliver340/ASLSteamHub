@@ -117,6 +117,7 @@ if (signUpForm != null) {
             let user = createNewUser(signUpForm.emailEntry.value, signUpForm.passwordEntry.value);
             addDocumentToCollection("Users", {
                 uid: user.uid,
+                name: signUpForm.fullName.value,
                 admin: false
             });
         }
