@@ -96,6 +96,10 @@ let createNewUser =  function(email, password) {
     
 }
 
+let idGen = function() {
+    return Date.now() + Math.random();
+}
+
 onAuthStateChanged(auth, (user) => {
     console.log("User status changed: ", user);
 })
