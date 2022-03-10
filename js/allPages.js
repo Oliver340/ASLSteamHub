@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, CollectionReference } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
 //Yes this isn't stored correctly, no I didn't fix this, yes I could have with the time I had, I just chose to not fail other classes
@@ -50,6 +50,14 @@ let getDocumentsFromCollection = function(collectionReference) {
         });
 }
 
+let addDocumentToCollection = async function(collectionName, document) {
+    await addDoc(collection(db, collectionName), document).then(() => {
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+}
+
 let deleteDocumentFromCollection = function(collectionReference, documentID) {
     const documentReference = doc(db, collectionReference, documentID);
     deleteDoc(documentReference);
@@ -75,7 +83,7 @@ let logout = function() {
     })
 }
 
-let createNewUser = function(email, password) {
+let createNewUser =  function(email, password) {
     let user = null;
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredentials) => {
@@ -85,6 +93,7 @@ let createNewUser = function(email, password) {
         .catch((err) => {
             console.log(err.message);
         });
+    
 }
 
 onAuthStateChanged(auth, (user) => {
@@ -92,7 +101,6 @@ onAuthStateChanged(auth, (user) => {
 })
 
 const loginForm = document.querySelector("#login");
-
 if (loginForm != null) {
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -100,5 +108,45 @@ if (loginForm != null) {
         console.log(user);
     })
 }
+
+let signUpForm = document.querySelector("#signUp");
+if (signUpForm != null) {
+    signUpForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (signUpForm.passwordEntry.value == signUpForm.confirmPasswordEntry.value) {
+            let user = createNewUser(signUpForm.emailEntry.value, signUpForm.passwordEntry.value);
+            addDocumentToCollection("Users", {
+                uid: user.uid,
+                admin: false
+            });
+        }
+    })
+}
+
+let wordSubmissionContainer = document.querySelector("#wordSubmissionContainer");
+if (wordSubmissionContainer != null) {
+    wordSubmissionContainer.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (wordSubmissionContainer.wordEntry.value == null
+            || wordSubmissionContainer.linkEntry.value == null
+            || wordSubmissionContainer.scientificDefinitionEntry.value == null
+            || wordSubmissionContainer.plainDefinitionEntry.value == null) {
+                alert("Please fill all fields");
+        } else {
+            addDocumentToCollection("Pending Review", {
+                word: wordSubmissionContainer.wordEntry.value,
+                link: wordSubmissionContainer.linkEntry.value,
+                scientificDefinition: wordSubmissionContainer.scientificDefinitionEntry.value,
+                plainDefinition: wordSubmissionContainer.plainDefinitionEntry.value
+            });
+            wordSubmissionContainer.reset()
+        }
+    })
+}
+
+// const userListPage = document.querySelector("#userListPage");
+// if (userListPage != null) {
+//     if user.
+// }
 
 //export { createNewUser, logout, login, deleteDocumentFromCollection, getDocumentsFromCollection };
