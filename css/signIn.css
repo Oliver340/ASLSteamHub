@@ -33,10 +33,11 @@ form {
     border-width: 1.5px;
 }
 
-#login > button {
+#login > input[type="submit"] {
     border-radius: 13px;
     width: 100px;
     margin: 2%;
+    margin-top: 3vmin;
     padding: 2vmin;
     align-self: center;
     background-color: #9da0a6;
@@ -49,4 +50,6 @@ form {
     text-align: center;
     color: #405a8f;
     font-size: larger;
+    margin-top: 4vmin;
+    margin-bottom: 3vmin;
 }
