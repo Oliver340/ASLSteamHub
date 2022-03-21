@@ -23,6 +23,10 @@ header {
     width: 10vmin;
     margin: 3%;
 }
+#backIcon {
+    width: 5vh;
+    margin: 3%;
+}
 #signUpButton {
     margin: 2%;
     border-radius: 20px;
@@ -50,6 +54,8 @@ footer {
 }
 h1 {
     border-bottom: solid;
-    padding: 1vmin 2vmin 2vmin 10vmin;
+    padding: 1vmin 2vmin 2vmin 0vmin;
 	font-size: 3em;
+    display: flex;
+    align-items: center;
 }

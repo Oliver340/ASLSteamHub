@@ -1,31 +1,25 @@
-
-#loginContainer {
+#settingsContainer {
     border-radius: 20px;
     padding: 1.5vmin;
     background-color: rgb(244,244,244);
     display: flex;
     flex-direction: column;
     margin: 15vmin;
+    height: auto;
+    width: auto;
 }
-#loginContainer > * {
+#changeProfile > * {
     margin: 2vmin;
-}
-
-header {
-    justify-content: center;
+    font-size:large;
 }
 
 form {
     display: contents;
 }
 
-#login > * {
-    margin: 2vmin;
-    font-size:large;
-}
-
-#login > input[type="text"] {
-    padding: 3vmin;
+#changeProfile > input[type="text"] {
+    padding: 2.5vmin;
+    margin: 1.5vmin;
     background-color: rgb(192, 192, 192);
     border-radius: 1em;
     border-style: solid;
@@ -33,20 +27,10 @@ form {
     border-width: 1.5px;
 }
 
-#login > input[type="password"] {
-    padding: 3vmin;
-    background-color: rgb(192, 192, 192);
-    border-radius: 1em;
-    border-style: solid;
-    border-color: #5c5c5c;
-    border-width: 1.5px;
-}
-
-#login > input[type="submit"] {
+#changeProfile > input[type="submit"] {
     border-radius: 13px;
-    width: 100px;
-    margin: 2%;
-    margin-top: 3vmin;
+    width: auto;
+    margin: 4vmin;
     padding: 2vmin;
     align-self: center;
     background-color: #9da0a6;
@@ -55,10 +39,10 @@ form {
     border-width: 1.5px;
 }
 
-#loginContainer > a {
+#settingsContainer > a {
     text-align: center;
     color: #405a8f;
     font-size: larger;
-    margin-top: 4vmin;
-    margin-bottom: 3vmin;
+    margin-top: 2.5vmin;
+    margin-bottom: 2vmin;
 }

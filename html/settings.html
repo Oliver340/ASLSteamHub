@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+    <header>
+        <image id="logo" src="../images/logo.png" alt="logoImage"></image>
+        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="location.href='home.html';"></image>
+    </header>
+
+    <h1><image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>Settings</h1>
+    
+    <div id="settingsContainer">
+        <form id="changeProfile">
+            <label for="oldFullName">Old Full Name: </label>
+            <input id="oldFullName" type="text" placeholder="Full Name">
+            <label id="oldEmailEntry">Old Email:</label>
+            <input id="oldEmailEntry" type="text" placeholder="Email">
+            <label id="oldPasswordEntry">Old Password:</label>
+            <input id="oldPasswordEntry" type="text" placeholder="Password">
+
+            <label for="fullName">New Full Name: </label>
+            <input id="fullName" type="text" placeholder="Full Name">
+            <label id="emailEntry">New Email:</label>
+            <input id="emailEntry" type="text" placeholder="Email">
+            <label id="passwordEntry">New Password:</label>
+            <input id="passwordEntry" type="text" placeholder="Password">
+            <label id="confirmPasswordEntry">Confirm Password:</label>
+            <input id="confirmPasswordEntry" type="text" placeholder="Confirm Password">
+            <input type="submit" value="Save Changes"/>
+        </form>
+    </div>
+</body>
+</html>
