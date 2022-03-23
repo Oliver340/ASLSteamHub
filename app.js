@@ -1,39 +1,56 @@
-//*******SETUP PORTION*******//
-
-// Import the functions you need from the SDKs you need
 const express = require('express');
 const path = require('path');
-const server = express();
-const updir = '..';
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-server.use('/html', express.static(path.join(__dirname, "html")));
-server.use('/css', express.static(path.join(__dirname, "css")));
-server.use('/images', express.static(path.join(__dirname, "images")));
-server.use('/js', express.static(path.join(__dirname, "js")));
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
+const app = express();
 
-server.engine('html', require('ejs').renderFile);
+const routes = require('./routes/index')(app);
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+//app.engine('html', require('ejs').renderFile);
 
-//*******MAIN CLIENT PORTION*******//
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-server.get('/', (req, res) => {
-  // looks in base path /views by default, either change filedir or do it like this
-  res.render(updir + '/html/home.html');
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 
-//*******MAIN API PORTION*******//
-
-server.post('/api/signup', (req, res) => {
-  let q = req.body;
-
-  // req.body contains the passed json object, can access as q['x'] or q.x
-  // firebase auth stuff goes here
-  res.send({ help: false });
-});
-
-// server.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`);
-// });
+module.exports = app;

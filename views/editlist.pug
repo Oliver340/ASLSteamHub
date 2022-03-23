@@ -1,0 +1,18 @@
+// Page where you would edit your lists.
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Edit List
+  script(src='../js/firebase.js')
+  link(rel='stylesheet' href='../css/general.css')
+  link(rel='stylesheet' href='../css/editList.css')
+header
+  image#logo(src='../images/logo.png' alt='logoImage')
+  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick="location.href='http://localhost:32535/home';")
+h1 My Lists
+form
+  label(for='listName') List Name: 
+  input#listName(type='text' name='listName' value='List 1')
+#listContainer
+  button#addWord + new word

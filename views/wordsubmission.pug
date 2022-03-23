@@ -1,0 +1,18 @@
+// Page where you can submit words to the dictionary.
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Word Submission
+  script(src='../js/dropDown.js')
+  link(rel='stylesheet' href='../css/general.css')
+  link(rel='stylesheet' href='../css/wordSubmission.css')
+header
+  image#logo(src='../images/logo.png' alt='logoImage')
+  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick="location.href='http://localhost:32535/home';")
+#wordSubmissionContainer
+  input#wordEntry(type='text' placeholder='Enter New Word')
+  input#linkEntry(type='text' placeholder='Enter Link of ASL Sign')
+  input#scientificDefinitionEntry(type='text' placeholder='Scientific Definition of Word')
+  input#plainDefinitionEntry(type='text' placeholder='Plain Definition of Word')
+  button(type='button') Add to Dictionary
