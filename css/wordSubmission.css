@@ -1,3 +1,9 @@
+
+form {
+    border-style:solid;
+    border-color: #581B1F;
+}
+
 #wordSubmissionContainer {
     border-radius: 20px;
     padding: 4vmin;
@@ -5,32 +11,45 @@
     display: flex;
     flex-direction: column;
     margin: 15vmin;
+    font-size: 1.15em;
 }
 #wordSubmissionContainer > * {
     margin: 1.5vmin;
 }
 
 
+input {
+    font-size: 0.8em;
+}
+
+label {
+    font-size: 1.10em;
+}
+
 #wordSubmissionContainer > input[type="text"]{
     padding: 3vmin;
     background-color: rgb(172,175,185);
     padding: 3vmin;
-    background-color: rgb(192, 192, 192);
+    background-color: rgba(230,227,230,1);
     border-radius: 1em;
     border-style: solid;
-    border-color: #5c5c5c;
+    border-color: #581B1F;
     border-width: 1.5px;
+    font-weight:600;
+    font-weight: normal;
 }
 
 #wordSubmissionContainer > input[type="submit"] {
-    border-radius: 20px;
-    width: 100px;
+    border-radius: 1em;
+    width: auto;
     margin: 2%;
     margin-top: 3vmin;
     padding: 2vmin;
     padding: 2vmin;
     align-self: center;
-    background-color: #9da0a6;
-    border-style: solid;
-    border-color: #5c5c5c;
+    background-color: #011640;
+    color: rgba(230,227,230,1);
+    border-style:solid;
+    border-color: #011640;
 }
+
