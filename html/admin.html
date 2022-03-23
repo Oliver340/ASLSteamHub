@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit List</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="../css/general.css">
-    <link rel="stylesheet" href="../css/editList.css">
+    <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
 
@@ -15,19 +15,13 @@
         <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="logoClick()"></image>
     </header>
 
-    <h1><image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>Edit List</h1>
-
-    <form>
-        <label for="listName">List Name: </label>
-        <input type="text" id="listName" name="listName" value="List 1">
-    </form>
+    <h1><image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>Admin</h1>
     
     <div id="listContainer">
-        <button id="addWord" onclick="location.href='library.html';">+ add word</button>
         <div class="wordContainer">
             <h2 id="canada">Canada
-                <image class="deleteIcon" src="../images/deleteicon.png" alt="deleteIcon"></image>
-                <image id="mailIcon" src="../images/mailicon.png" alt="mailIcon"></image>
+                <button id="accept">Accept</button>
+                <button id="reject">Reject</button>
             </h2>
             <iframe src="https://www.youtube.com/embed/IA3J6LFtVzY"></iframe>
             <p class="plainDesc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos nemo eum voluptatem vel! Labore laudantium, excepturi earum, ipsam sunt deserunt, deleniti totam voluptas dignissimos blanditiis natus alias? Quae magnam explicabo numquam amet unde praesentium voluptatum modi enim quis eveniet laudantium incidunt sapiente aut autem in, earum, molestias eaque ipsa omnis natus non vero et porro architecto? Vitae debitis qui nihil cupiditate?</p>
@@ -35,8 +29,8 @@
         </div>
         <div class="wordContainer">
             <h2 id="hello">Hello
-                <image class="deleteIcon" src="../images/deleteicon.png" alt="deleteIcon"></image>
-                <image id="mailIcon" src="../images/mailicon.png" alt="mailIcon"></image>
+                <button id="accept">Accept</button>
+                <button id="reject">Reject</button>
             </h2>
             <iframe src="https://www.youtube.com/embed/QB44Vddoi-w"></iframe>
             <p class="plainDesc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos nemo eum voluptatem vel! Labore laudantium, excepturi earum, ipsam sunt deserunt, deleniti totam voluptas dignissimos blanditiis natus alias? Quae magnam explicabo numquam amet unde praesentium voluptatum modi enim quis eveniet laudantium incidunt sapiente aut autem in, earum, molestias eaque ipsa omnis natus non vero et porro architecto? Vitae debitis qui nihil cupiditate?</p>

@@ -27,7 +27,7 @@ form {
     border-width: 1.5px;
 }
 
-#changeProfile > input[type="submit"] {
+#changeProfile > input[type="submit"], button {
     border-radius: 13px;
     width: auto;
     margin: 4vmin;
@@ -45,4 +45,8 @@ form {
     font-size: larger;
     margin-top: 2.5vmin;
     margin-bottom: 2vmin;
+}
+
+#adminView {
+    float: right;
 }
