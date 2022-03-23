@@ -28,11 +28,33 @@ server.get('/', (req, res) => {
 //*******MAIN API PORTION*******//
 
 server.post('/api/signup', (req, res) => {
-  let q = req.body;
-
-  // req.body contains the passed json object, can access as q['x'] or q.x
-  // firebase auth stuff goes here
-  res.send({ help: false });
+  try {
+    const email = req.body.email;
+    const name = req.body.name;
+    
+    const password = bcrypt.hash(req.body.password, saltRounds, (err, salt) => {
+        connection.query(`INSERT INTO Users ('Email', 'Password', 'Full Name') VALUES ('${email}', '${password}', '${name}');`, (err, result) => {
+            if (err) throw err;
+            let token = generateLoginToken();
+            connection.query(`UPDATE Users SET 'Login Token' = ${token} WHERE 'Email' = '${email}'`, (err, result) => {
+                if (err) throw err;
+                connection.query(`INSERT INTO Players ('Player ID', 'Full Name', 'DOB', 'Sex', 'Skill Level', 'Allergies/Medication', 'Emergency Contact Number', 'Email')
+                    VALUES (NULL, ${name}, ${dateOfBirth}, ${sex}, ${skill}, ${allergies}, ${emergency}, ${email});`, (err, result) => {
+                    if (err) throw err;
+                    res.send({
+                        code: 200,
+                        message: token
+                    });
+                });
+            });
+        });
+    });
+} catch {
+    res.send({
+        code: 400,
+        message: "An error occurred. :("
+    });
+}
 });
 
 server.listen(port, () => {
