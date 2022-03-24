@@ -1,0 +1,23 @@
+// Page where you would sign in or log in (loads dynamically).
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sign Up
+  link(rel='stylesheet' href='../css/general.css')
+  link(rel='stylesheet' href='../css/signUp.css')
+header
+  image#logo(src='../images/logo.png')
+img(src='../images/videoexample.png' style='width: 50%;margin-left: 25%;margin-top: 5%;')
+#loginContainer
+  form#login
+    label#fullName Full Name:
+    input#fullName(type='text' placeholder='Full Name')
+    label#emailEntry Email:
+    input#emailEntry(type='text' placeholder='Email')
+    label#passwordEntry Password:
+    input#passwordEntry(type='text' placeholder='Password')
+    input#submitButton(type='submit' value='Create Account')
+  a(href='http://localhost:32535/signin') already have an account
+script(src='../js/bundle.js')
+// <script src="../js/signIn.js"></script>

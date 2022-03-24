@@ -1,0 +1,42 @@
+// Page where it would have your profile and list of lists.
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title List
+  script(src='../js/firebase.js')
+  link(rel='stylesheet' href='../css/general.css')
+  link(rel='stylesheet' href='../css/library.css')
+header
+  image#logo(src='../images/logo.png' alt='logoImage')
+  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick="location.href='http://localhost:32535/home';")
+h1 Library
+input#searchbar(type='text' placeholder='Search...')
+#libraryContainer
+  button#addWord(onclick="location.href='http://localhost:32535/submitword';") + new word
+  .wordContainer
+    h2#canada
+      | Canada
+      image.addIcon(src='../images/addtofoldericon.png' alt='addIcon')
+    iframe(src='https://www.youtube.com/embed/IA3J6LFtVzY')
+    p.plainDesc
+      | Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos nemo eum voluptatem vel! Labore laudantium, excepturi earum, ipsam sunt deserunt, deleniti totam voluptas dignissimos blanditiis natus alias? Quae magnam explicabo numquam amet unde praesentium voluptatum modi enim quis eveniet laudantium incidunt sapiente aut autem in, earum, molestias eaque ipsa omnis natus non vero et porro architecto? Vitae debitis qui nihil cupiditate?
+    p.scientificDesc
+      | Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo alias rem nam tempore voluptate mollitia, natus nisi. Laboriosam cupiditate, provident iste nihil nesciunt pariatur molestias distinctio beatae adipisci earum. Adipisci!
+  .wordContainer
+    h2#hello
+      | Hello
+      image.addIcon(src='../images/addtofoldericon.png' alt='addIcon')
+    iframe(src='https://www.youtube.com/embed/QB44Vddoi-w')
+    p.plainDesc
+      | Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos nemo eum voluptatem vel! Labore laudantium, excepturi earum, ipsam sunt deserunt, deleniti totam voluptas dignissimos blanditiis natus alias? Quae magnam explicabo numquam amet unde praesentium voluptatum modi enim quis eveniet laudantium incidunt sapiente aut autem in, earum, molestias eaque ipsa omnis natus non vero et porro architecto? Vitae debitis qui nihil cupiditate?
+    p.scientificDesc
+      | Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo alias rem nam tempore voluptate mollitia, natus nisi. Laboriosam cupiditate, provident iste nihil nesciunt pariatur molestias distinctio beatae adipisci earum. Adipisci!
+script.
+  const node = document.getElementById("searchbar");
+  node.addEventListener("keyup", ({key}) => {
+  if (key === "Enter") {
+  location.href='#' + node.value.toLowerCase();
+  console.log("enter pressed");
+  }
+  });

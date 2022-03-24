@@ -1,0 +1,22 @@
+// Page where you would have the list of categories.
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Home
+  link(rel='stylesheet' href='../css/home.css')
+  link(rel='stylesheet' href='../css/general.css')
+header
+  image#logo(src='../images/logo.png' alt='logoImage')
+  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick="location.href='http://localhost:32535/home';")
+h1 Home
+#categories
+  #lists(onclick="location.href='http://localhost:32535/lists';")
+    image#listIcon(src='../images/listicon.png' alt='listIcon')
+  #library(onclick="location.href='http://localhost:32535/library';")
+    image#libraryIcon(src='../images/libraryicon.png' alt='libraryIcon')
+  #settings
+    image#settingsIcon(src='../images/settingsicon.png' alt='settingsIcon')
+  #FAQ
+    image#FAQIcon(src='../images/FAQicon.png' alt='FAQIcon')
+// <footer>Contact Us</footer>
