@@ -4,19 +4,26 @@
 const express = require('express');
 const path = require('path');
 const bcrypt = require('bcrypt');
-const mysql = requrie('mysql');
+const mysql = require('mysql');
 const jwt = require("jsonwebtoken");
+const { randomUUID } = require('crypto');
 
 const server = express();
 const port = 4757;
 const updir = '..';
 const saltRounds = 12;
 const secretKey = "X0x1fAHRJojFrRGw16XJ";
+// const connection = mysql.createConnection({
+//     host: "localhost:3306",
+//     user: "antoi_aslsteam",
+//     password: "1D1^o2or",
+//     database: "antoinette_jackson_bcit_ca_aslsteamhub "
+// });
 const connection = mysql.createConnection({
-    host: "localhost:3306",
-    user: "antoi_aslsteam",
-    password: "1D1^o2or",
-    database: "antoinette_jackson_bcit_ca_aslsteamhub "
+    host: "127.0.0.1",
+    user: "root",
+    password: "",
+    database: "aslsteamhub"
 });
 connection.connect();
 
@@ -45,13 +52,13 @@ server.post('/api/signup', (req, res) => {
         const email = req.body.email;
         const name = req.body.name;
 
-        const password = bcrypt.hash(req.body.password, saltRounds, (err, salt) => {
-            connection.query(`INSERT INTO User ('Email', 'Password', 'Full Name') VALUES ('${email}', '${password}', '${name}');`, (err, result) => {
+        bcrypt.hash(req.body.password, saltRounds, (err, salt) => {
+            connection.query(`INSERT INTO User (UserID, FullName, Email, Password) VALUES (UUID(), '${name}', '${email}', '${salt}');`, (err, result) => {
                 if (err) throw err;
-                connection.query(`SELECT Permissions FROM User WHERE Password = '${password}'`, (err, resp) =>{
+                connection.query(`SELECT Permissions FROM User WHERE Password = '${salt}'`, (err, resp) =>{
                     console.long
                     res.json(jwt.sign({
-                        password: password,
+                        password: salt,
                         admin: resp
                     }, secretKey, {
                         expiresIn: "12h",
@@ -69,10 +76,10 @@ server.post('/api/signup', (req, res) => {
 
 server.post('/api/signIn', (req, res) => {
     try {
-        connection.query(`SELECT Password, Permissions, UserID FROM Users WHERE Email '= ${req.body.email}'`, (e, r) => {
+        connection.query(`SELECT Password, Permissions, UserID FROM User WHERE Email = '${req.body.email}'`, (e, r) => {
             if (e) throw e;
-            if (bcrypt.compareSync(req.body.password, r)) {
-                res.json(jwt.sign(r, secretKey, {
+            if (bcrypt.compareSync(req.body.password, r[0].Password)) {
+                res.json(jwt.sign(JSON.parse(JSON.stringify(r[0])), secretKey, {
                     expiresIn: "12h",
                 }));
             }
