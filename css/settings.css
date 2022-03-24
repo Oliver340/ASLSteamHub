@@ -54,3 +54,7 @@ form {
     position: absolute;
     right: 10;
 }
+h2 {
+    font-size: large;
+    align-self: center;
+}
