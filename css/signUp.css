@@ -22,7 +22,7 @@ header {
     justify-content: center;
 }
 
-#signUp > input[type="text"] {
+#signUp > input[type="text"], #signUp > input[type="password"] {
     padding: 2.5vmin;
     margin: 1.5vmin;
     background-color: rgb(192, 192, 192);
@@ -50,4 +50,14 @@ header {
     font-size: larger;
     margin-top: 2.5vmin;
     margin-bottom: 2vmin;
+}
+iframe {
+    width: 80vmin;
+    height: 45vmin;
+    margin: 5%;
+}
+#videoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
