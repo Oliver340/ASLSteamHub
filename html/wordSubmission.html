@@ -17,18 +17,19 @@
 
     <h1><image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>Word Submission</h1>
     
-    <form id="wordSubmissionContainer">
-        <label for="word">Enter new term:</label>
-        <input id="wordEntry" type="text" placeholder="Enter New Term">
-        <label for="link">Enter the Link of ASL Sign:</label>
-        <input id="linkEntry" type="text" placeholder="Enter Link of ASL Sign">
-        <label for="termDefinition">Enter the terminology definition:</label>
-        <input id="scientificDefinitionEntry" type="text" placeholder="Scientific Definition of The Term">
-        <label for="wordDefinition">Enter the word definition:</label>
-        <input id="plainDefinitionEntry" type="text" placeholder="Plain Definition of Word">
-        <input type="submit" value="Submit Word"/>
-    </form>
-
+    <div id="formContainer">
+        <form id="wordSubmissionContainer">
+            <label for="word">Enter new term:</label>
+            <input id="wordEntry" type="text" placeholder="Enter New Term">
+            <label for="link">Enter the Link of ASL Sign:</label>
+            <input id="linkEntry" type="text" placeholder="Enter Link of ASL Sign">
+            <label for="termDefinition">Enter the terminology definition:</label>
+            <input id="scientificDefinitionEntry" type="text" placeholder="Scientific Definition of The Term">
+            <label for="wordDefinition">Enter the word definition:</label>
+            <input id="plainDefinitionEntry" type="text" placeholder="Plain Definition of Word">
+            <input type="submit" value="Submit Word"/>
+        </form>
+    </div>
     <script src="../js/submitWord.js"></script>
     <script src="../js/homeIcon.js"></script>
 </body>

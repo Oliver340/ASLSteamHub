@@ -17,7 +17,7 @@ form {
     display: contents;
 }
 
-#changeProfile > input[type="text"] {
+#changeProfile > input[type="text"], #changeProfile > input[type="password"]{
     padding: 2.5vmin;
     margin: 1.5vmin;
     background-color: rgb(192, 192, 192);
@@ -27,7 +27,7 @@ form {
     border-width: 1.5px;
 }
 
-#changeProfile > input[type="submit"] {
+#changeProfile > input[type="submit"], button {
     border-radius: 13px;
     width: auto;
     margin: 4vmin;
@@ -45,4 +45,12 @@ form {
     font-size: larger;
     margin-top: 2.5vmin;
     margin-bottom: 2vmin;
+}
+
+#adminView {
+    /* float: right; */
+    font-size: large;
+    /* display: inline-block; */
+    position: absolute;
+    right: 10;
 }
