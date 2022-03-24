@@ -4,23 +4,29 @@ html, body {
     margin: 0;
     min-height: 100vh;
 	min-width: 100vw;
-	background: rgb(100,102,107);
-	background: linear-gradient(180deg, rgba(100,102,107,1) 25%, rgba(113,115,119,1) 31%, rgba(137,139,142,1) 43%, rgba(151,152,155,1) 55%, rgba(183,184,185,1) 70%, rgba(201,202,202,1) 85%, rgba(224,224,224,0.31) 100%);
+    background: rgb(197,216,233);
+    background: linear-gradient(180deg, rgba(197,216,233,1) 20%, rgba(206,219,232,1) 26%, rgba(213,221,232,1) 31%, rgba(220,223,231,1) 41%, rgba(224,225,231,1) 47%, rgba(230,227,230,1) 57%, rgba(233,228,230,1) 65%, rgba(233,228,230,1) 65%, rgba(234,228,230,1) 72%, rgba(237,229,230,1) 81%, rgba(240,230,230,1) 91%, rgba(242,231,230,1) 100%);
+    
 }
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #64666b;
+    background-color: #c5d8e6;
 	padding: 10px;
 	height: 20%;
 }
 #logo {
-    width: 40vmin;
+    width: 65vmin;
     margin: 2%;
 }
 #homeIcon {
     width: 10vmin;
+    margin: 3%;
+}
+#backIcon {
+    width: 5vh;
     margin: 3%;
 }
 #signUpButton {
@@ -41,15 +47,26 @@ footer {
     color: black;
 }
 #searchbar {
+    align-self: center;
     margin: 5%;
     width: 70%;
     height: 3%;
     margin-left: 15%;
-    border-radius: 20px;
-    padding-left: 10px;
+
+    background-color: rgb(172,175,185);
+    padding: 3vmin;
+    background-color: rgb(192, 192, 192);
+    border-radius: 1em;
+    border-style: solid;
+    border-color: #5c5c5c;
+    border-width: 1.5px;
+    
+    font-size: large;
 }
 h1 {
     border-bottom: solid;
-    padding: 1vmin 2vmin 2vmin 10vmin;
-	font-size: 3em;
+    padding: 1vmin 2vmin 2vmin 0vmin;
+	font-size: 2.5em;
+    display: flex;
+    align-items: center;
 }

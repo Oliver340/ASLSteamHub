@@ -1,5 +1,5 @@
 #listContainer {
-    background-color: #c8c9cc;
+    background-color: rgba(230,227,230,1);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
@@ -12,8 +12,16 @@
 }
 #listContainer > button {
     font-size: 1em;
-    background-color: #9da0a6;
+    background-color: rgba(224,225,231,1);
+    color: #011640;
+    border-color: #011640;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 0.5em;
+    border-width: 2px;
+    margin: 2%;
+    padding: 2vmin;
 }
+
 #mailIcon, #editIcon {
     width: 35px;
     margin-left: 25px;

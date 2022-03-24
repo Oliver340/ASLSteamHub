@@ -1,22 +1,26 @@
-<!-- Page where you would sign in or log in (loads dynamically). -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Settings</title>
     <link rel="stylesheet" href="../css/general.css">
-    <link rel="stylesheet" href="../css/signUp.css">
+    <link rel="stylesheet" href="../css/settings.css">
 </head>
 <body>
     <header>
-        <image id="logo" src="../images/logo.png"></image>
+        <image id="logo" src="../images/logo.png" alt="logoImage"></image>
+        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="logoClick()"></image>
     </header>
+
+    <h1>
+        <image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>
+        Settings
+        <button id="adminView" onclick="location.href='admin.html'">Admin View</button>
+    </h1>
     
-    
-    <img src="../images/videoexample.png" style="width: 50%;margin-left: 25%;margin-top: 5%;">
-    <div id="signUpContainer">
-        <form id="signUp">
+    <div id="settingsContainer">
+        <form id="changeProfile">
             <label for="fullName">Full Name: </label>
             <input id="fullName" type="text" placeholder="Full Name">
             <label for="emailEntry">Email:</label>
@@ -25,13 +29,9 @@
             <input id="passwordEntry" type="password" placeholder="Password">
             <label for="confirmPasswordEntry">Confirm Password:</label>
             <input id="confirmPasswordEntry" type="password" placeholder="Confirm Password">
-            <!-- onClick to be changed to logOn() function -->
-            <input type="submit" value="Sign Up"/>
+            <input id="submitForm" type="submit" value="Save Changes"/>
         </form>
-        <a href="../html/signUp.html">Sign In</a>
     </div>
-
-    <script src="../js/signUp.js"></script>
-    <!--<script src="../js/signIn.js"></script> -->
+    <script src="../js/homeIcon.js"></script>
 </body>
 </html>
