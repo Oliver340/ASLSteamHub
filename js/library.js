@@ -60,17 +60,27 @@ let convertLinkToEmbed = (ytURL) => {
     return embedStr;
 }
 
-let url = convertLinkToEmbed("https://www.youtube.com/watch?v=oB5v0SBTCrA");
-addWordToLibrary(document.getElementById("libraryContainer"), "PleaseWORK", url, "pleaseee", "pls");
+const libraryContainer = document.getElementById("libraryContainer");
+const xhttp = new XMLHttpRequest();
+const endPoint = "http://localhost:32535/api/library";
 
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4) {
+        if (xhttp.status == 200) {
+            let jsonData = JSON.parse(xhttp.response);
+            jsonData.forEach(element => {
+                let word = element.Word;
+                let plainDef = element.PlainDef;
+                let sciDef = element.TechDef;
+                let url = element.VideoLink;
+                url = convertLinkToEmbed(url);
+                addWordToLibrary(libraryContainer, word, url, plainDef, sciDef);
+            });
+        }
+    }
+};
 
-
-
-// <div class="wordContainer">
-//     <h2 id="hello">Hello<image class="addIcon" src="../images/addtofoldericon.png" alt="addIcon"></image></h2>
-//     <iframe src="https://www.youtube.com/embed/QB44Vddoi-w"></iframe>
-//     <h4>Plain Definition</h4>
-//     <p class="plainDesc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos nemo eum voluptatem vel! Labore laudantium, excepturi earum, ipsam sunt deserunt, deleniti totam voluptas dignissimos blanditiis natus alias? Quae magnam explicabo numquam amet unde praesentium voluptatum modi enim quis eveniet laudantium incidunt sapiente aut autem in, earum, molestias eaque ipsa omnis natus non vero et porro architecto? Vitae debitis qui nihil cupiditate?</p>
-//     <h4>Scientific Definition</h4>
-//     <p class="scientificDesc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo alias rem nam tempore voluptate mollitia, natus nisi. Laboriosam cupiditate, provident iste nihil nesciunt pariatur molestias distinctio beatae adipisci earum. Adipisci!</p>
-// </div>
+const getWord = function() {
+    xhttp.open("GET", endPoint, true);
+    xhttp.send();
+}();
