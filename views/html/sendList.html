@@ -11,8 +11,19 @@
 
     <header>
         <image id="logo" src="../images/logo.png" alt="logoImage"></image>
-        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="location.href='home.html';"></image>
+        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="logoClick()"></image>
     </header>
     
+    <h1><image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>Send List</h1>
+
+    <form id="mailContainer">
+        <input id="subjectEntry" type="text" placeholder="Auto filled with list name">
+        <input id="emailEntry" type="text" placeholder="Email">
+        <textarea id="messageEntry" type="text" placeholder="Standard message autofilled but editable"></textarea>
+        <input id="sendEmail" type="submit" value="Send">
+    </form>
+
+    <script src="../js/sendList.js"></script>
+    <script src="../js/homeIcon.js"></script>
 </body>
 </html>

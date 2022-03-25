@@ -11,10 +11,14 @@
 <body>
     <header>
         <image id="logo" src="../images/logo.png" alt="logoImage"></image>
-        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="location.href='home.html';" ></image>
+        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="logoClick()"></image>
     </header>
-
-    <h1>Home</h1>
+    
+    <h1><image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>Home</h1>
+    
+    <div id="videoContainer">
+        <iframe src="https://www.youtube.com/embed/oB5v0SBTCrA"></iframe>
+    </div>
     
     <div id="categories">
         <div id="lists" onclick="location.href='lists.html';">
@@ -23,14 +27,16 @@
         <div id="library" onclick="location.href='library.html';">
             <image id="libraryIcon" src="../images/libraryicon.png" alt="libraryIcon"></image>
         </div>
-        <div id="settings">
+        <div id="settings" onclick="location.href='settings.html';">
             <image id="settingsIcon" src="../images/settingsicon.png" alt="settingsIcon"></image>
         </div>
-        <div id="FAQ">
+        <div id="FAQ" onclick="location.href='FAQ.html';">
             <image id="FAQIcon" src="../images/FAQicon.png" alt="FAQIcon"></image>
         </div>
     </div>
 
     <!-- <footer>Contact Us</footer> -->
+
+    <script src="../js/homeIcon.js"></script>
 </body>
 </html>
