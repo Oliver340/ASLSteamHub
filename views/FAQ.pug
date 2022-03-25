@@ -1,0 +1,25 @@
+// Page that has a couple answers to frequent questions (static page)
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title FAQ
+  link(rel='stylesheet' href='../css/general.css')
+  link(rel='stylesheet' href='../css/FAQ.css')
+header
+  image#logo(src='../images/logo.png' alt='logoImage')
+  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick='logoClick()')
+h1
+  image#backIcon(src='../images/backicon.png' alt='backIcon' onclick='history.back()')
+  | FAQ
+#FAQContainer
+  .questionContainer
+    p.question What is this site supposed to do?
+    p
+      | It has a dictionary of ASL terms where users can make lists of words for upcoming meetings, and be better prepared for
+      | any technical jargon.
+  .questionContainer
+    p.question Who is this site for?
+    p
+      | It&apos;s for anyone who needs to learn and share their ASL signs.
+script(src='../js/homeIcon.js')

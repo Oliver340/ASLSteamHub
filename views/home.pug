@@ -1,4 +1,6 @@
-// Page where you would have the list of categories.
+//
+  Page that acts as a directory for navigation, there are options to go to the user's list,
+  their settings/profile, the FAQ page and the library page to view all the words in the database.
 head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
@@ -8,15 +10,20 @@ head
   link(rel='stylesheet' href='../css/general.css')
 header
   image#logo(src='../images/logo.png' alt='logoImage')
-  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick="location.href='http://localhost:32535/home';")
-h1 Home
+  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick='logoClick()')
+h1
+  image#backIcon(src='../images/backicon.png' alt='backIcon' onclick='history.back()')
+  | Home
+#videoContainer
+  iframe(src='https://www.youtube.com/embed/oB5v0SBTCrA')
 #categories
-  #lists(onclick="location.href='http://localhost:32535/lists';")
+  #lists(onclick="location.href='lists.html';")
     image#listIcon(src='../images/listicon.png' alt='listIcon')
   #library(onclick="location.href='http://localhost:32535/library';")
     image#libraryIcon(src='../images/libraryicon.png' alt='libraryIcon')
-  #settings
+  #settings(onclick="location.href='settings.html';")
     image#settingsIcon(src='../images/settingsicon.png' alt='settingsIcon')
-  #FAQ
+  #FAQ(onclick="location.href='FAQ.html';")
     image#FAQIcon(src='../images/FAQicon.png' alt='FAQIcon')
 // <footer>Contact Us</footer>
+script(src='../js/homeIcon.js')

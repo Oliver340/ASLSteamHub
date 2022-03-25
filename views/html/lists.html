@@ -1,11 +1,10 @@
-<!-- Page where it would have your profile and list of lists. -->
+<!-- Page where it has all your lists and you can edit and send them to other user's. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List</title>
-    <script src="../js/firebase.js"></script>
+    <title>Lists</title>
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/lists.css">
 </head>
@@ -13,51 +12,17 @@
     
     <header>
         <image id="logo" src="../images/logo.png" alt="logoImage"></image>
-        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="location.href='home.html';" ></image>
+        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="logoClick()"></image>
     </header>
 
-    <h1>My Lists</h1>
+    <h1><image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>My Lists</h1>
     
     <div id="listContainer">
         <button id="addList">+ new list</button>
     </div>
     
     
+    <script src="../js/lists.js"></script>
+    <script src="../js/homeIcon.js"></script>
 </body>
-<script>
-    let num = 0;
-    document.getElementById("addList").onclick = function() {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1;//January is 0!`
-
-        var yyyy = today.getFullYear();
-        if(dd<10){dd='0'+dd}
-        if(mm<10){mm='0'+mm}
-        var today = mm+'/'+dd+'/'+yyyy;
-        num++;
-        let element = document.createElement("div");
-        element.className = "lists";
-        element.textContent = "List" + num + " - " + today;
-
-        let image = document.createElement("img");
-        image.id = "mailIcon";
-        image.src = "../images/mailicon.png";
-        image.alt = "mailIcon";
-        image.onclick = function() {location.href='sendList.html';};
-
-        element.append(image);
-
-        
-        let image2 = document.createElement("img");
-        image2.id = "editIcon";
-        image2.src = "../images/editicon.png";
-        image2.alt = "editIcon";
-        image2.onclick = function() {location.href='editList.html';};
-
-        element.append(image2);
-
-        document.getElementById("listContainer").append(element);
-    }
-</script>
 </html>
