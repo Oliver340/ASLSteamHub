@@ -2,12 +2,14 @@
 An ASL dictionary for technical terms.
 
 ## Build
-Clone this repository and run the following command:
+Run the following commands:
 ```
+git clone https://github.com/Oliver340/ASLSteamHub.git
+cd ASLSteamHub
 npm install
 ```
 
-This will install all dependencies as per [package.json](./package.json)
+This will clone the repository and  install all dependencies as per [package.json](./package.json)
 
 ## Dependencies
 ASLSteamHub has the following NodeJS dependencies:
@@ -59,83 +61,93 @@ This token will automatically get the user's permission level and their UserID f
 
 ## Database
 
-The database for this project is MariaDB which is a MySQL relational database [MariaDB Websites](https://mariadb.com/)(https://mariadb.org/)
+The database for this project is [MariaDB](https://mariadb.com/) which is a MySQL relational database
+
 The database can be accessed through the BCIT Commons panel for the website.
 
 ## Schema Format 
 
-*note* Primary key's currently are set up to auto increment
+Note that Primary keys are setup to auto-increment.
 
-[Table Name]
+### __\[ Table Name \]__
 
-Basic notes
+> Basic notes
 
-<PK>[Primary Key's]
-<FK>[Foreign Key's] 
+> \<__PK__\> \[ Primary Keys \]<br>
+> \<__FK__\> \[ Foreign Keys \] 
 	
-Column Name | DataType | Character Limit or accepted Enums | Additional Notes
+|Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
+|---|---|---|---|
 
 ## Schema
 
-[Word]
+### __\[ Word \]__
 
-This table stores the necessary information for words added to the website.
+> This table stores the necessary information for words added to the website.
 
-<PK>[WordID]
-<FK>[UserID]
+> \<__PK__\> \[ WordID \]<br>
+> \<__FK__\> \[ UserID \]
 
-WordID 	 | int 		| 32 	| WordID currently auto increments
-UserID 	 | int 		| 32 	| User who submitted the word
-Word 	 | varchar 	| 32	| 
-PlainDef | varchar	| 1000	| Plain definition of word
-TechDef  | varchar	| 1000	| Technical definition of word
-VideoLink| varchar	| 64	| Video links primarly youtube links
-Status	 | enum		| 'PENDING', 'APPROVED'|
-DateAdded| datetime	| 'YYYY-MM-DD hh:mm:ss'|
+|Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
+|---|---|---|---|
+|WordID 	 | int 	| 32 	| WordID currently auto increments|
+|UserID 	 | int 	| 32 	| User who submitted the word|
+|Word 	 | varchar 	| 32	| |
+|PlainDef | varchar	| 1000	| Plain definition of word|
+|TechDef  | varchar	| 1000	| Technical definition of word|
+|VideoLink| varchar	| 64	| Video links primarly youtube links|
+|Status	 | enum		| 'PENDING', 'APPROVED'|
+|DateAdded| datetime| 'YYYY-MM-DD hh:mm:ss'|
 
-[User]
+### __\[ User \]__
 
-This table stores the user data of people who create an account.
-User is the default permission level of a recently created account.
-Admin allows the user to view words that are pending and approve them.
+> This table stores the user data of people who create an account.<br>
+> User is the default permission level of a recently created account.<br>
+> Admin allows the user to view words that are pending and approve them.
 
-<PK>[UserID]
+> \<__PK__\> \[ UserID \]
 
-UserID 	| int 		| 32 | UserID currently auto increments
-FullName| varchar	| 32 | Name/Username of the account
-Email 	| varchar	| 32 | Email associated with the account
-Password| varchar 	| 32 | Password is hashed with bcrypt with a 12 round salt
-Permissions| enum	| 'USER', 'ADMIN' | Level of access the account has  
+|Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
+|---|---|---|---|
+|UserID 	| int   | 32 | UserID currently auto increments|
+|FullName| varchar	| 32 | Name/Username of the account|
+|Email 	| varchar	| 32 | Email associated with the account|
+|Password| varchar 	| 32 | Password is hashed with bcrypt with a 12 round salt|
+|Permissions| enum	| 'USER', 'ADMIN' | Level of access the account has  |
 
-[List]
+### __\[ List \]__
 
-This table is used to store lists created by users.
+> This table is used to store lists created by users.
 
-<PK>[ListID]
-<FK>[UserID] 
+> \<__PK__\> \[ ListID \]<br>
+> \<__FK__\> \[ UserID \] 
 
-ListID | int		| 32 | ListID currently auto increments
-UserID | int 		| 32 | 
-ListName| varchar	| 32 | Name of the list chosen by the user. 
-CreationDate | datetime	| 'YYYY-MM-DD hh:mm:ss' | 
+|Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
+|---|---|---|---|
+ListID      | int		| 32 | ListID currently auto increments|
+UserID      | int 		| 32 | |
+ListName    | varchar	| 32 | Name of the list chosen by the user. |
+CreationDate| datetime	| 'YYYY-MM-DD hh:mm:ss' | 
 
-[LinkedList]
+### __\[ LinkedList \]__
 
-This table is used to connect words to lists. 
-This is to allow users to have a varible amount of words added to lists.
+>This table is used to connect words to lists.<br>
+>This is to allow users to have a varible amount of words added to lists.
 
-<PK>[ListID, WordID]
-<FK>[ListID, WordID]
+> \<__PK__\> \[ ListID, WordID \]<br>
+> \<__FK__\> \[ ListID, WordID \]
 
-ListID | int | 32 | The list selected
-WordID | int | 32 | The Word being added to the list
+|Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
+|---|---|---|---|
+ListID | int | 32 | The list selected|
+WordID | int | 32 | The Word being added to the list|
 
 ## TODOs
 - [x] Express routing
 - [x] API signup & signin
 - [x] List creation
 - [x] Admin word verification
-- [ ] Add a word
+- [x] Add a word
 - [ ] Add notes / comments
 - [ ] External search
 - [ ] Game (learning aspect, likely quite in-depth)
