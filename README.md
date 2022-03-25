@@ -45,14 +45,15 @@ Currently, there are a few endpoints:
 |---|---|---|
 |`/api/signup`|`email`: __string__<br>`name`: __string__<br>`password`: __string__|Signs a new user up for an account|
 |`/api/signIn`|`email`: __string__<br>`password`: __string__|Signs an existing user into their account|
-|`/api/lists`|`token`: __string__|Get the current user's saved lists|
+|`/api/getList`|`token`: __string__|Get the specified list|
 |`/api/addWord`|`token`: __string__<br>|Add a new word to the current list __`TODO: I HAVE NO IDEA WHERE THE WORD IS COMING FROM HERE, I THINK WE NEED A NEW BODY PARAMETER`__|
 |`/api/library`|`token`: __string__|Get all words in the approved global dictionary|
-|`/api/admin`|`token`: __string__|Show all pending global words|
-|`/api/settings`|`token`: __string__|Update user settings|
+|`/api/admin`|`token`: __string__|Get all pending global words|
+|`/api/profile`|`token`: __string__|Update user profile|
+|`/api/modifyPendingWord`|`token`: __string__|Perform an action on a Pending word|
 
 ### What is a __token__?
-When a user signs in, they will be granded a temporary token as a [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) `secretkey`. This key lasts for 12 hours in either a browser cookie or localstorage. __`TODO: VERIFY WHICH`__
+When a user signs in, they will be granded a temporary token as a [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) `secretkey`. This key lasts for 12 hours in localstorage.
 
 This token will automatically get the user's permission level and their UserID for accessing the database. 
 
