@@ -4,9 +4,18 @@
 #listContainer > * {
     margin: 2vmin;
 }
-#listContainer > button {
-    font-size: 1em;
+button {
+    border-radius: 20px;
+    font-size: 0.5em;
+    margin: 2%;
+    margin-top: 3vmin;
+    padding: 2vmin;
+    padding: 2vmin;
+    align-self: center;
     background-color: #9da0a6;
+    border-style: solid;
+    border-color: #5c5c5c;
+    float: right;
 }
 .wordContainer {
     background-color: #c8c9cc;
@@ -23,21 +32,6 @@
 .wordContainer > * {
     margin: 10px;
 }
-.deleteIcon {
-    width: 35px;
-    margin-left: 25px;
-}
-#mailIcon {
-    width: 35px;
-}
 .wordContainer > p {
     font-size: 0.75em;
-}
-form {
-    font-size: 2em;
-    margin: 2vmin;
-}
-form > input {
-    font-size: 1em;
-    width: 40%;
 }

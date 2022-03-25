@@ -1,4 +1,4 @@
-// Page where you would log on (loads dynamically).
+// Page where can sign in go to create a new account or continue without an account.
 head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
@@ -8,15 +8,16 @@ head
   link(rel='stylesheet' href='../css/signIn.css')
 header
   image#logo(src='../images/logo.png')
-img(src='../images/videoexample.png' style='width: 50%;margin-left: 25%;margin-top: 2%;')
+#videoContainer
+  iframe(src='https://www.youtube.com/embed/0Tgzc6cqkEQ')
 #loginContainer
   form#login
-    label#emailEntry Email:
+    label(for='emailEntry') Email:
     input#emailEntry(type='text' placeholder='Email')
-    label#passwordEntry Password:
-    input#passwordEntry(type='text' placeholder='Password')
-    // onClick to be changed to logOn() function
-    button(type='button' onclick='signIn()') Log on
-  a(href='http://localhost:32535/signup') create new account
-// script src to be changed to log on .js file
-script(src='../js/signIn.js')
+    label(for='passwordEntry') Password:
+    input#passwordEntry(type='password' placeholder='Password')
+    input(type='submit' value='Login')
+  a(href='../html/signUp.html') create new account
+  a(href='../html/home.html') continue without an account
+  // script src to be changed to log on .js file
+  script(src='../js/signIn.js')

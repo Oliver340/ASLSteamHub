@@ -1,4 +1,4 @@
-<!-- Page where you would sign in or log in (loads dynamically). -->
+<!-- Page where you can create an account or go to sign in page. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,22 +13,27 @@
         <image id="logo" src="../images/logo.png"></image>
     </header>
     
-    
-    <img src="../images/videoexample.png" style="width: 50%;margin-left: 25%;margin-top: 5%;">
-    <div id="loginContainer">
-        <form id="login">
-            <label id="fullName">Full Name:</label>
-            <input id="fullName" type="text" placeholder="Full Name">
-            <label id="emailEntry">Email:</label>
-            <input id="emailEntry" type="text" placeholder="Email">
-            <label id="passwordEntry">Password:</label>
-            <input id="passwordEntry" type="text" placeholder="Password">
-            <input id="submitButton" type="submit" value="Create Account">
-        </form>
-        <a href="../html/signIn.html">already have an account</a>
+    <div id="videoContainer">
+        <iframe src="https://www.youtube.com/embed/DF4DQgxmhPs"></iframe>
     </div>
 
-    <script src="../js/bundle.js"></script>
+    <div id="signUpContainer">
+        <form id="signUp">
+            <label for="fullName">Full Name: </label>
+            <input id="fullName" type="text" placeholder="Full Name">
+            <label for="emailEntry">Email:</label>
+            <input id="emailEntry" type="text" placeholder="Email">
+            <label for="passwordEntry">Password:</label>
+            <input id="passwordEntry" type="password" placeholder="Password">
+            <label for="confirmPasswordEntry">Confirm Password:</label>
+            <input id="confirmPasswordEntry" type="password" placeholder="Confirm Password">
+            <!-- onClick to be changed to logOn() function -->
+            <input type="submit" value="Sign Up"/>
+        </form>
+        <a href="../html/signIn.html">Sign In</a>
+    </div>
+
+    <script src="../js/signUp.js"></script>
     <!--<script src="../js/signIn.js"></script> -->
 </body>
 </html>

@@ -1,27 +1,25 @@
-// Page where a user can add and remove words from their list and change their list names.
+//
+  Page that allows the admin to view the pending words that user's have submitted and accept or reject them from
+  the database.
 head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Edit List
+  title Admin
   link(rel='stylesheet' href='../css/general.css')
-  link(rel='stylesheet' href='../css/editList.css')
+  link(rel='stylesheet' href='../css/admin.css')
 header
   image#logo(src='../images/logo.png' alt='logoImage')
   image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick='logoClick()')
 h1
   image#backIcon(src='../images/backicon.png' alt='backIcon' onclick='history.back()')
-  | Edit List
-form
-  label(for='listName') List Name: 
-  input#listName(type='text' name='listName' value='List 1')
-  image#mailIcon(src='../images/mailicon.png' alt='mailIcon' onclick="location.href='sendList.html';")
+  | Admin
 #listContainer
-  button#addWord(onclick="location.href='library.html';") + add word
   .wordContainer
     h2#canada
       | Canada
-      image.deleteIcon(src='../images/deleteicon.png' alt='deleteIcon')
+      button#accept Accept
+      button#reject Reject
     iframe(src='https://www.youtube.com/embed/IA3J6LFtVzY')
     h4 Plain Definition
     p.plainDesc
@@ -32,7 +30,8 @@ form
   .wordContainer
     h2#hello
       | Hello
-      image.deleteIcon(src='../images/deleteicon.png' alt='deleteIcon')
+      button#accept Accept
+      button#reject Reject
     iframe(src='https://www.youtube.com/embed/QB44Vddoi-w')
     h4 Plain Definition
     p.plainDesc

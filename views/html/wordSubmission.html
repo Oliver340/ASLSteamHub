@@ -1,28 +1,37 @@
-<!-- Page where you can submit words to the dictionary. -->
+<!-- Page where you can submit words to the dictionary, with details of the term the url
+    to the video of the ASL sign, the scientific definition and the plain definition.
+    They will then be pending and have to be approved by an admin on the admin view. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Submission</title>
-    <script src="../js/dropDown.js"></script>
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/wordSubmission.css">
 </head>
 <body>
     <header>
         <image id="logo" src="../images/logo.png" alt="logoImage"></image>
-        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="location.href='home.html';"></image>
+        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="logoClick()"></image>
     </header>
 
+    <h1><image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>Word Submission</h1>
     
-    <div id="wordSubmissionContainer">
-        <input id="wordEntry" type="text" placeholder="Enter New Word">
-        <input id="linkEntry" type="text" placeholder="Enter Link of ASL Sign">
-        <input id="scientificDefinitionEntry" type="text" placeholder="Scientific Definition of Word">
-        <input id="plainDefinitionEntry" type="text" placeholder="Plain Definition of Word">
-        <button type="button">Add to Dictionary</button>
+    <div id="formContainer">
+        <form id="wordSubmissionContainer">
+            <label for="word">Enter new term:</label>
+            <input id="wordEntry" type="text" placeholder="Enter New Term">
+            <label for="link">Enter the Link of ASL Sign:</label>
+            <input id="linkEntry" type="text" placeholder="Enter Link of ASL Sign">
+            <label for="termDefinition">Enter the terminology definition:</label>
+            <input id="scientificDefinitionEntry" type="text" placeholder="Scientific Definition of The Term">
+            <label for="wordDefinition">Enter the word definition:</label>
+            <input id="plainDefinitionEntry" type="text" placeholder="Plain Definition of Word">
+            <input type="submit" value="Submit Word"/>
+        </form>
     </div>
-    
+    <script src="../js/submitWord.js"></script>
+    <script src="../js/homeIcon.js"></script>
 </body>
 </html>
