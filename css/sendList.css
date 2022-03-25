@@ -9,9 +9,10 @@
 }
 #mailContainer > * {
     margin: 2vmin;
+    border-radius: 1em;
 }
 
-#mailContainer > input, #mailContainer > textarea {
+#mailContainer > input[type="text"], #mailContainer > textarea {
     padding: 3vmin;
     background-color: rgb(172,175,185);
 }
@@ -21,8 +22,7 @@ textarea {
     border-width: 2px;
 }
 
-#mailContainer > button {
-    border-radius: 20px;
+#mailContainer > input[type="submit"] {
     width: 100px;
     margin: 2%;
     padding: 2vmin;
