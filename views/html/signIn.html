@@ -1,4 +1,4 @@
-<!-- Page where you would log on (loads dynamically). -->
+<!-- Page where can sign in go to create a new account or continue without an account. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,19 +12,22 @@
     <header>
         <image id="logo" src="../images/logo.png"></image>
     </header>
+
+    <div id="videoContainer">
+        <iframe src="https://www.youtube.com/embed/0Tgzc6cqkEQ"></iframe>
+    </div>
     
-    <img src="../images/videoexample.png" style="width: 50%;margin-left: 25%;margin-top: 2%;">
     <div id="loginContainer">
         <form id="login">
-            <label id="emailEntry">Email:</label>
+            <label for="emailEntry">Email:</label>
             <input id="emailEntry" type="text" placeholder="Email">
-            <label id="passwordEntry">Password:</label>
-            <input id="passwordEntry" type="text" placeholder="Password">
-            <!-- onClick to be changed to logOn() function -->
-            <button type="button" onclick="signIn()">Log on</button>
+            <label for="passwordEntry">Password:</label>
+            <input id="passwordEntry" type="password" placeholder="Password">
+            <input type="submit" value="Login"/>
         </form>
         <a href="../html/signUp.html">create new account</a>
-    </div>
+        <a href="../html/home.html">continue without an account</a>
+    </form>
 
     <!-- script src to be changed to log on .js file -->
     <script src="../js/signIn.js"></script>

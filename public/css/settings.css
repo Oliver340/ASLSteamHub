@@ -1,5 +1,4 @@
-
-#signUpContainer {
+#settingsContainer {
     border-radius: 20px;
     padding: 1.5vmin;
     background-color: rgb(244,244,244);
@@ -9,7 +8,7 @@
     height: auto;
     width: auto;
 }
-#signUp > * {
+#changeProfile > * {
     margin: 2vmin;
     font-size:large;
 }
@@ -18,11 +17,7 @@ form {
     display: contents;
 }
 
-header {
-    justify-content: center;
-}
-
-#signUp > input[type="text"], #signUp > input[type="password"] {
+#changeProfile > input[type="text"], #changeProfile > input[type="password"]{
     padding: 2.5vmin;
     margin: 1.5vmin;
     background-color: rgb(192, 192, 192);
@@ -32,7 +27,7 @@ header {
     border-width: 1.5px;
 }
 
-#signUp > input[type="submit"] {
+#changeProfile > input[type="submit"], button {
     border-radius: 13px;
     width: auto;
     margin: 4vmin;
@@ -44,20 +39,22 @@ header {
     border-width: 1.5px;
 }
 
-#signUpContainer > a {
+#settingsContainer > a {
     text-align: center;
     color: #405a8f;
     font-size: larger;
     margin-top: 2.5vmin;
     margin-bottom: 2vmin;
 }
-iframe {
-    width: 80vmin;
-    height: 45vmin;
-    margin: 5%;
+
+#adminView {
+    /* float: right; */
+    font-size: large;
+    /* display: inline-block; */
+    position: absolute;
+    right: 10;
 }
-#videoContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+h2 {
+    font-size: large;
+    align-self: center;
 }

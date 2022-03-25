@@ -11,20 +11,8 @@ module.exports = (router) => {
         res.sender('signup');
     });
     
-    router.get('/category', (req, res) => {
-        res.render('category');
-    });
-    
-    router.get('/dashboard', (req, res) => {
-        res.render('dashboard');
-    });
-    
     router.get('/editList/:id', (req, res) => {
         res.render('editList');
-    });
-    
-    router.get('/game', (req, res) => {
-        res.render('game');
     });
     
     router.get('/lists', (req, res) => {
@@ -50,4 +38,13 @@ module.exports = (router) => {
     router.get('/library', (req, res) => {
         res.render('library');
     });
+
+    router.get('/admin', (req, res) => {
+        res.render('admin');
+    });
+
+    router.get('/FAQ', (req, res) => {
+        res.render('FAQ');
+    });
+    
 };
