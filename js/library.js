@@ -1,10 +1,13 @@
-const node = document.getElementById("searchbar");
-node.addEventListener("keyup", ({key}) => {
+const searchbar = document.getElementById("searchbar");
+const searchButton = document.getElementById("searchIcon");
+searchbar.addEventListener("keyup", ({key}) => {
     if (key === "Enter") {
-        location.href='#' + node.value.toLowerCase();
-        console.log("enter pressed");
+        location.href='#' + searchbar.value.toLowerCase();
     }
 });
+searchButton.onclick = () => {
+    location.href='#' + searchbar.value.toLowerCase();
+}
 
 let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
 
@@ -43,7 +46,23 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
 
 }
 
-addWordToLibrary(document.getElementById("libraryContainer"), "PleaseWORK", "https://www.youtube.com/embed/QB44Vddoi-w", "pleaseee", "pls");
+let convertLinkToEmbed = (ytURL) => {
+    let embedStr = "https://www.youtube.com/embed/";
+    let i = 0;
+    while (ytURL[i] != "=" && i < ytURL.length) {
+    		i++;
+    }
+    i++;
+    while (i < ytURL.length && ytURL[i] != "&") {
+    		embedStr += ytURL[i];
+        i++;
+    }
+    return embedStr;
+}
+
+let url = convertLinkToEmbed("https://www.youtube.com/watch?v=oB5v0SBTCrA");
+addWordToLibrary(document.getElementById("libraryContainer"), "PleaseWORK", url, "pleaseee", "pls");
+
 
 
 
