@@ -60,27 +60,31 @@ Currently, there are a few endpoints:
 |---|---|---|
 |`/api/signup`|`email`: __string__<br>`name`: __string__<br>`password`: __string__|Signs a new user up for an account|
 |`/api/signIn`|`email`: __string__<br>`password`: __string__|Signs an existing user into their account|
-|`/api/getList`|`token`: __string__|Get the specified list|
-|`/api/addWord`|`token`: __string__<br>|Add a new word to the current list __`TODO: I HAVE NO IDEA WHERE THE WORD IS COMING FROM HERE, I THINK WE NEED A NEW BODY PARAMETER`__|
-|`/api/library`|`token`: __string__|Get all words in the approved global dictionary|
+|`/api/getList`|`token`: __string__<br>`ListID`: __string__|Get the specified list|
+|`/api/editList`|`token`: __string__<br>`operation`: __string__<br>`ListID`: __string__<br>`WordID`: __string__<br>`ListName`: __string__|Add a word to a specified list.<br>Delete a word from a specified list.<br>Update list name.<br><br>Valid options for `operation`:<br>`ADD`<br>`DELETE`<br>`UPDATE`
+|`/api/addWord`|`token`: __string__<br>`Word`: __string__<br>`PlainDef`: __string__<br>`TechDef`: __string__<br>`VideoLink`: __string__|Add a word to the pending global dictionary|
+|`/api/library`||Get all words in the approved global dictionary|
 |`/api/admin`|`token`: __string__|Get all pending global words|
-|`/api/profile`|`token`: __string__|Update user profile|
-|`/api/modifyPendingWord`|`token`: __string__|Perform an action on a Pending word|
+|`/api/profile`|`token`: __string__<br>`operation`:__string__|Get or update user profile.<br>Valid options for `operation`:<br>`GET`<br>`UPDATE`|
+|`/api/createNewList`|`token`: __string__<br>`ListName`: __string__|Create a new list owned by the logged in user.
+|`/api/modifyPendingWord`|`token`: __string__<br>`operation`: __string__<br>`Word`: __string__<br>`PlainDef`: __string__<br>`TechDef`: __string__<br>`VideoLink`: __string__<br>`Status`: __string__<br>`WordID`: __string__|Approve, deny, or update a pending word. User must be an admin to perform this.<br>Valid options for `operation`:<br>`ADD`<br>`DELETE`<br>`UPDATE`|
+|`/api/getUserLists`|`token`: __string__|Get all the lists associated with the user.|
+|`/api/searchLibrary`|`SearchTerm`: __string__|Gets all words like the search term from the approved global dictionary.|
 
 ### What is a __token__?
-When a user signs in, they will be granted a temporary token as a [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) `secretkey`. This key lasts for 12 hours in localstorage.
+When a user signs in, they will be granted a temporary token as a [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken). This key lasts for 12 hours in localstorage and contains the user's UserID and Permission level.
 
 This token will automatically get the user's permission level and their UserID for accessing the database. 
 
 ## Database
 
-The database for this project is [MariaDB](https://mariadb.com/) which is a MySQL relational database
+The database for this project is [MariaDB](https://mariadb.com/) which is a MySQL relational database that uses the InnoDB storage engine. 
 
 The database can be accessed through the BCIT Commons panel for the website.
 
 ## Schema Format 
 
-Note that Primary keys are setup to auto-increment.
+Note that Primary keys are generated with the `UUID` function.
 
 ### __\[ Table Name \]__
 
