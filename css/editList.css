@@ -23,9 +23,12 @@
 .wordContainer > * {
     margin: 10px;
 }
-#mailIcon, .deleteIcon {
+.deleteIcon {
     width: 35px;
     margin-left: 25px;
+}
+#mailIcon {
+    width: 35px;
 }
 .wordContainer > p {
     font-size: 0.75em;
@@ -36,4 +39,5 @@ form {
 }
 form > input {
     font-size: 1em;
+    width: 40%;
 }
