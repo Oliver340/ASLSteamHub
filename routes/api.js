@@ -101,7 +101,7 @@ module.exports = (router) => {
                 });
             } else if (req.body.operation == "UPDATE") {
                 //edit list name
-                connection.query(`UPDATE List SET ListName=${req.body.ListName} WHERE ListID=${req.body.ListID}`, (err, response) => {
+                connection.query(`UPDATE List SET ListName='${req.body.ListName}' WHERE ListID='${req.body.ListID}'`, (err, response) => {
                     res.json({
                         code: 200,
                         message: "List updated successfully"
@@ -109,14 +109,19 @@ module.exports = (router) => {
                 });
             }
         }
-    })
+    });
     
     router.get('/api/library', (req, res) => {
-        let permission = validate(req.body.token);
-        if (permission) {
-            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status=APPROVED`, (err, result) => {
+        try{
+            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
+                if (err) throw err;
                 res.json(result);
             });
+        } catch (e) {
+            res.json({
+                code: 400,
+                message: e.message
+            })
         }
     });
     
@@ -130,17 +135,19 @@ module.exports = (router) => {
                 });
             }
         }
-    })
+    });
     
     router.post('/api/profile', (req, res) => {
         let permission = validate(req.body.token);
         if (permission) {
             if (req.body.operation == "GET") {
                 connection.query(`SELECT FullName, Email FROM User WHERE UserID=${permission.UserID}`, (err, result) => {
+                    if (err) throw err;
                     res.json(result);
                 });
             } else if (req.body.operation == "UPDATE") {
-                connection.query(`UPDATE User SET FullName=${req.body.FullName}, Email=${req.body.Email} WHERE UserID=${permission.UserID}`, (err, result) => {
+                connection.query(`UPDATE User SET FullName='${req.body.FullName}', Email='${req.body.Email}' WHERE UserID=${permission.UserID}`, (err, result) => {
+                    if (err) throw err;
                     res.json({
                         code: 200,
                         message: "Updated user successfully"
@@ -162,22 +169,59 @@ module.exports = (router) => {
                 })
             })
         }
-    })
+    });
 
     router.post('/api/modifyPendingWord', (req, res) => {
-        let permission = validate(req.body.token)
+        let permission = validate(req.body.token);
         if (permission) {
             if (permission.Permissions == "ADMIN") {
                 if (req.body.operation == "APPROVE") {
-                    connection.query(`UPDATE Word SET Status=APPROVED WHERE WordID=${req.body.WordID}`);
+                    connection.query(`UPDATE Word SET Status=APPROVED WHERE WordID='${req.body.WordID}'`);
                 } else if (req.body.operation == "DENY") {
                     connection.query(`DELETE FROM Word WHERE WordID=${req.body.WordID}`);
                 } else if (req.body.operation == "UPDATE") {
-                    connection.query(`UPDATE Word SET Word=${req.body.Word}, PlainDef=${req.body.PlainDef}, TechDef=${req.body.TechDef}, VideoLink=${req.body.VideoLink}, Status=${req.body.Status} WHERE WordID=${req.body.WordID}`);
+                    connection.query(`UPDATE Word SET Word='${req.body.Word}', PlainDef='${req.body.PlainDef}', TechDef='${req.body.TechDef}', VideoLink='${req.body.VideoLink}', Status='${req.body.Status}' WHERE WordID='${req.body.WordID}'`);
                 }
             }
         }
-    })
+    });
+
+    router.post('/api/addWord', (req, res) => {
+        let permission = validate(req.body.token);
+        if (permission) {
+            connection.query(`INSERT INTO Word (WordID, UserID, Word, PlainDef, TechDef, VideoLink) VALUES (UUID(), '${permission.UserID}', '${req.body.Word}', '${req.body.PlainDef}', '${req.body.TechDef}', '${req.body.VideoLink}')`, (err, result) => {
+                if (err) throw err;
+                res.json({
+                    code: 200,
+                    message: "Successfully added word to pending list."
+                });
+            });
+        }
+    });
+
+    router.post('/api/getUserLists', (req, res) => {
+        let permission = validate(req.body.token);
+        if (permission) {
+            connection.query(`SELECT ListID, ListName FROM List WHERE UserID='${permission.UserID}'`, (err, result) => {
+                if (err) throw err;
+                res.json(result);
+            });
+        }
+    });
+
+    router.get('/api/searchLibrary', (req, res) => {
+        if (req.query.SearchTerm == "") {
+            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
+                if (err) throw err;
+                res.json(result);
+            });
+        } else {
+            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED', Word LIKE '${req.query.SearchTerm}'`, (err, result) => {
+                if (err) throw err;
+                res.json(result);
+            });
+        }
+    });
     
     let validate = (token) => {
         try {
