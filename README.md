@@ -56,6 +56,79 @@ When a user signs in, they will be granded a temporary token as a [jsonwebtoken]
 
 This token will automatically get the user's permission level and their UserID for accessing the database. 
 
+## Database
+
+The database for this project is MariaDB which is a MySQL relational database [MariaDB Websites](https://mariadb.com/)(https://mariadb.org/)
+The database can be accessed through the BCIT Commons panel for the website.
+
+## Schema Format 
+
+*note* Primary key's currently are set up to auto increment
+
+[Table Name]
+
+Basic notes
+
+<PK>[Primary Key's]
+<FK>[Foreign Key's] 
+	
+Column Name | DataType | Character Limit or accepted Enums | Additional Notes
+
+## Schema
+
+[Word]
+
+This table stores the necessary information for words added to the website.
+
+<PK>[WordID]
+<FK>[UserID]
+
+WordID 	 | int 		| 32 	| WordID currently auto increments
+UserID 	 | int 		| 32 	| User who submitted the word
+Word 	 | varchar 	| 32	| 
+PlainDef | varchar	| 1000	| Plain definition of word
+TechDef  | varchar	| 1000	| Technical definition of word
+VideoLink| varchar	| 64	| Video links primarly youtube links
+Status	 | enum		| 'PENDING', 'APPROVED'|
+DateAdded| datetime	| 'YYYY-MM-DD hh:mm:ss'|
+
+[User]
+
+This table stores the user data of people who create an account.
+User is the default permission level of a recently created account.
+Admin allows the user to view words that are pending and approve them.
+
+<PK>[UserID]
+
+UserID 	| int 		| 32 | UserID currently auto increments
+FullName| varchar	| 32 | Name/Username of the account
+Email 	| varchar	| 32 | Email associated with the account
+Password| varchar 	| 32 | Password is hashed with bcrypt with a 12 round salt
+Permissions| enum	| 'USER', 'ADMIN' | Level of access the account has  
+
+[List]
+
+This table is used to store lists created by users.
+
+<PK>[ListID]
+<FK>[UserID] 
+
+ListID | int		| 32 | ListID currently auto increments
+UserID | int 		| 32 | 
+ListName| varchar	| 32 | Name of the list chosen by the user. 
+CreationDate | datetime	| 'YYYY-MM-DD hh:mm:ss' | 
+
+[LinkedList]
+
+This table is used to connect words to lists. 
+This is to allow users to have a varible amount of words added to lists.
+
+<PK>[ListID, WordID]
+<FK>[ListID, WordID]
+
+ListID | int | 32 | The list selected
+WordID | int | 32 | The Word being added to the list
+
 ## TODOs
 - [x] Express routing
 - [x] API signup & signin
