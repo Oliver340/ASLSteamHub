@@ -112,12 +112,9 @@ module.exports = (router) => {
     })
     
     router.get('/api/library', (req, res) => {
-        let permission = validate(req.body.token);
-        if (permission) {
-            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status=APPROVED`, (err, result) => {
-                res.json(result);
-            });
-        }
+        connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
+            res.json(result);
+        });
     });
     
     router.post('/api/admin', (req, res) => {
