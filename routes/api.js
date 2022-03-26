@@ -31,12 +31,14 @@ module.exports = (router) => {
                     if (err) throw err;
                     connection.query(`SELECT Permissions, UserID FROM User WHERE Password = '${salt}'`, (err, resp) =>{
                         if (err) throw err;
-                        res.json(jwt.sign({
-                            Permissions: resp.Permissions,
-                            UserID: resp.UserID
-                        }, secretKey, {
-                            expiresIn: "12h",
-                        }));
+                        res.json({
+                            token: jwt.sign({
+                                Permissions: resp.Permissions,
+                                UserID: resp.UserID
+                            }, secretKey, {
+                                expiresIn: "12h",
+                            })
+                        });
                     })
                 });
             });
@@ -54,9 +56,16 @@ module.exports = (router) => {
                 if (e) throw e;
                 console.log(r);
                 if (bcrypt.compareSync(req.body.password, r[0].Password)) {
-                    res.json(jwt.sign(JSON.parse(JSON.stringify(r[0])), secretKey, {
-                        expiresIn: "12h",
-                    }));
+                    console.log(r);
+                    let token = {
+                        token: jwt.sign({
+                            Permissions: r[0].Permissions,
+                            UserID: r[0].UserID
+                        }, secretKey, {
+                            expiresIn: "12h",
+                        })
+                    }
+                    res.json(token);
                 } else {
                     res.status(500);
                     res.json({
@@ -80,9 +89,10 @@ module.exports = (router) => {
                 connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, List.ListName
                     FROM Word 
                     LEFT JOIN LinkedList ON Word.WordID = LinkedList.WordID
-                    LEFT JOIN List ON List.ListID = LinkedList.WordID
-                    WHERE List.ListID = ${req.body.ListID}`, (err, result) => {
+                    LEFT JOIN List ON List.ListID = LinkedList.ListID
+                    WHERE List.ListID=${req.body.ListID} AND List.UserID=${permission.UserID}`, (err, result) => {
                             if (err) throw err;
+                            console.log(result);
                             res.json(result);
                         });
             } else {
@@ -322,6 +332,7 @@ module.exports = (router) => {
     let validate = (token) => {
         try {
             let response = jwt.verify(token, secretKey);
+            console.log(response);
             return {
                 Permissions: response.Permissions,
                 UserID: response.UserID
