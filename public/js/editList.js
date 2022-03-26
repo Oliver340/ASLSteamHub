@@ -1,21 +1,9 @@
-const searchbar = document.getElementById("searchbar");
-const searchButton = document.getElementById("searchIcon");
-// Functions to search
-searchbar.addEventListener("keyup", ({key}) => {
-    if (key === "Enter") {
-        location.href='#' + searchbar.value.toLowerCase();
-    }
-});
-searchButton.onclick = () => {
-    location.href='#' + searchbar.value.toLowerCase();
-}
-
-// Function to add a word to the page
+// Function to add a word to the page with delete icon
 let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
 
     let wordContainer = document.createElement("div");
     let headerElement = document.createElement("h2");
-    let addIcon = document.createElement("img");
+    let deleteIcon = document.createElement("img");
     let videoElement = document.createElement("iframe");
     let hpd = document.createElement("h4");
     let hsd = document.createElement("h4");
@@ -25,10 +13,10 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
     wordContainer.className = "wordContainer";
     headerElement.id = word.toLowerCase();
     headerElement.textContent = word;
-    addIcon.className = "addIcon";
-    addIcon.src = "../images/addtofoldericon.png";
-    addIcon.alt = "addIcon";
-    headerElement.appendChild(addIcon);
+    deleteIcon.className = "deleteIcon";
+    deleteIcon.src = "../images/deleteicon.png";
+    deleteIcon.alt = "deleteIcon";
+    headerElement.appendChild(deleteIcon);
     videoElement.src = url;
     hpd.textContent = "Plain Definition";
     hsd.textContent = "Scientific Definition";
@@ -63,9 +51,10 @@ let convertLinkToEmbed = (ytURL) => {
     return embedStr;
 }
 
-const libraryContainer = document.getElementById("libraryContainer");
+const listContainer = document.getElementById("listContainer");
 const xhttp = new XMLHttpRequest();
-const endPoint = "http://localhost:32535/api/library";
+const endPointGetList = "http://localhost:32535/api/getList";
+const endPointEditList = "http://localhost:32535/api/editList";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
@@ -77,17 +66,29 @@ xhttp.onreadystatechange = function() {
                 let sciDef = element.TechDef;
                 let url = element.VideoLink;
                 url = convertLinkToEmbed(url);
-                addWordToLibrary(libraryContainer, word, url, plainDef, sciDef);
+                addWordToLibrary(listContainer, word, url, plainDef, sciDef);
             });
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
-            libraryContainer.innerHTML = jsonData.message;
+            listContainer.innerHTML = jsonData.message;
         }
     }
 };
 
 // Sends get req
 const getWords = function() {
-    xhttp.open("GET", endPoint, true);
-    xhttp.send();
+    xhttp.open("GET", endPointGetList, true);
+    xhttp.setRequestHeader("Content-Type", "application/JSON");
+    xhttp.send(JSON.stringify({ }));
 }();
+
+document.getElementById("deleteIcon").addEventListener("click", () => {
+    reviewWord("DELETE");
+});
+
+// Edits list
+const editList = function(operation) {
+    xhttp.open("POST", endPointEditList, true);
+    xhttp.setRequestHeader("Content-Type", "application/JSON");
+    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: operation}));
+};

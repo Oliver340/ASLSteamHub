@@ -1,21 +1,10 @@
-const searchbar = document.getElementById("searchbar");
-const searchButton = document.getElementById("searchIcon");
-// Functions to search
-searchbar.addEventListener("keyup", ({key}) => {
-    if (key === "Enter") {
-        location.href='#' + searchbar.value.toLowerCase();
-    }
-});
-searchButton.onclick = () => {
-    location.href='#' + searchbar.value.toLowerCase();
-}
-
-// Function to add a word to the page
+// Function to add a word to the page with a reject and accept instead
 let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
 
     let wordContainer = document.createElement("div");
     let headerElement = document.createElement("h2");
-    let addIcon = document.createElement("img");
+    let acceptIcon = document.createElement("button");
+    let rejectIcon = document.createElement("button");
     let videoElement = document.createElement("iframe");
     let hpd = document.createElement("h4");
     let hsd = document.createElement("h4");
@@ -25,10 +14,12 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
     wordContainer.className = "wordContainer";
     headerElement.id = word.toLowerCase();
     headerElement.textContent = word;
-    addIcon.className = "addIcon";
-    addIcon.src = "../images/addtofoldericon.png";
-    addIcon.alt = "addIcon";
-    headerElement.appendChild(addIcon);
+    acceptIcon.id = "accept";
+    acceptIcon.textContent = "Accept";
+    rejectIcon.id = "reject";
+    rejectIcon.textContent = "Reject";
+    headerElement.appendChild(acceptIcon);
+    headerElement.appendChild(rejectIcon);
     videoElement.src = url;
     hpd.textContent = "Plain Definition";
     hsd.textContent = "Scientific Definition";
@@ -63,9 +54,10 @@ let convertLinkToEmbed = (ytURL) => {
     return embedStr;
 }
 
-const libraryContainer = document.getElementById("libraryContainer");
+const listContainer = document.getElementById("listContainer");
 const xhttp = new XMLHttpRequest();
-const endPoint = "http://localhost:32535/api/library";
+const endPointAdmin = "http://localhost:32535/api/admin";
+const endPointModifyPendingWord = "http://localhost:32535/api/modifyPendingWord";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
@@ -77,17 +69,33 @@ xhttp.onreadystatechange = function() {
                 let sciDef = element.TechDef;
                 let url = element.VideoLink;
                 url = convertLinkToEmbed(url);
-                addWordToLibrary(libraryContainer, word, url, plainDef, sciDef);
+                addWordToLibrary(listContainer, word, url, plainDef, sciDef);
             });
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
-            libraryContainer.innerHTML = jsonData.message;
+            listContainer.innerHTML = jsonData.message;
         }
     }
 };
 
 // Sends get req
 const getWords = function() {
-    xhttp.open("GET", endPoint, true);
-    xhttp.send();
+    xhttp.open("POST", endPointAdmin, true);
+    xhttp.setRequestHeader("Content-Type", "application/JSON");
+    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken")}));
 }();
+
+document.getElementById("accept").addEventListener("click", () => {
+    reviewWord("APPROVE");
+});
+
+document.getElementById("reject").addEventListener("click", () => {
+    reviewWord("DENY");
+});
+
+// Accepts or rejects word
+const reviewWord = function(decision) {
+    xhttp.open("POST", endPointModifyPendingWord, true);
+    xhttp.setRequestHeader("Content-Type", "application/JSON");
+    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: decision}));
+};
