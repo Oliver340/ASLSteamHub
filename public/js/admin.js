@@ -1,5 +1,5 @@
 // Function to add a word to the page with a reject and accept instead
-let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
+let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
 
     let wordContainer = document.createElement("div");
     let headerElement = document.createElement("h2");
@@ -12,6 +12,7 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
     let sd = document.createElement("p");
 
     wordContainer.className = "wordContainer";
+    wordContainer.id = wordID;
     headerElement.id = word.toLowerCase();
     headerElement.textContent = word;
     acceptIcon.id = "accept";
@@ -68,8 +69,9 @@ xhttp.onreadystatechange = function() {
                 let plainDef = element.PlainDef;
                 let sciDef = element.TechDef;
                 let url = element.VideoLink;
+                let wordID = element.WordID;
                 url = convertLinkToEmbed(url);
-                addWordToLibrary(listContainer, word, url, plainDef, sciDef);
+                addWordToLibrary(listContainer, word, url, plainDef, sciDef, wordID);
             });
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
@@ -86,16 +88,18 @@ const getWords = function() {
 }();
 
 document.getElementById("accept").addEventListener("click", () => {
-    reviewWord("APPROVE");
+    let wordID = this.parentElement.parentElement.id;
+    reviewWord("APPROVE", wordID);
 });
 
 document.getElementById("reject").addEventListener("click", () => {
-    reviewWord("DENY");
+    let wordID = this.parentElement.parentElement.id;
+    reviewWord("DENY", wordID);
 });
 
 // Accepts or rejects word
-const reviewWord = function(decision) {
+const reviewWord = function(decision, wordID) {
     xhttp.open("POST", endPointModifyPendingWord, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: decision}));
+    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: decision, WordID: wordID}));
 };
