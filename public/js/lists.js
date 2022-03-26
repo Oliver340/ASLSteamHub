@@ -1,4 +1,3 @@
-let num = 0;
 document.getElementById("addList").onclick = function() {
     var today = new Date();
     var dd = today.getDate();
@@ -8,7 +7,7 @@ document.getElementById("addList").onclick = function() {
     if(dd<10){dd='0'+dd}
     if(mm<10){mm='0'+mm}
     var today = mm+'/'+dd+'/'+yyyy;
-    num++;
+    
     let element = document.createElement("div");
     element.className = "lists";
     element.textContent = "List" + num + " - " + today;

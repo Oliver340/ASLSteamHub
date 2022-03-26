@@ -76,6 +76,8 @@ xhttp.onreadystatechange = function() {
                 url = convertLinkToEmbed(url);
                 addWordToLibrary(libraryContainer, word, url, plainDef, sciDef);
             });
+        } else if (xhttp.status == 500) {
+            libraryContainer.innerHTML = "Could not get words from database";
         }
     }
 };
