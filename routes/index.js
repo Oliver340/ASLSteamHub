@@ -8,7 +8,7 @@ module.exports = (router) => {
     });
 
     router.get('/signup', (req, res) => {
-        res.sender('signup');
+        res.render('signup');
     });
     
     router.get('/editList', (req, res) => {
