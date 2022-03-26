@@ -67,7 +67,7 @@ xhttp.onreadystatechange = function() {
         if (xhttp.status == 200) {
             let jsonData = JSON.parse(xhttp.response);
             jsonData.forEach(element => {
-                let listName = element.listName;
+                let listName = element.ListName;
                 updateLists(listName);
             });
         } else if (xhttp.status == 500) {
@@ -78,6 +78,6 @@ xhttp.onreadystatechange = function() {
 
 const getList = function() {
     xhttp.open("POST", endPoint, true);
-    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.setRequestHeader("Content-Type", "application/JSON");
     xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken")}));
 }();

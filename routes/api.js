@@ -315,7 +315,7 @@ module.exports = (router) => {
         try {
             let permission = validate(req.body.token);
             if (permission) {
-                connection.query(`SELECT ListID, ListName FROM List WHERE UserID='${permission.UserID}'`, (err, result) => {
+                connection.query(`SELECT ListID, ListName FROM List WHERE UserID=${permission.UserID}`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });
@@ -353,7 +353,6 @@ module.exports = (router) => {
     let validate = (token) => {
         try {
             let response = jwt.verify(token, secretKey);
-            console.log(response);
             return {
                 Permissions: response.Permissions,
                 UserID: response.UserID
