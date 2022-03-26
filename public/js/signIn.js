@@ -2,8 +2,7 @@ const loginForm = document.querySelector("#login");
 
 loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    let user = login(loginForm.emailEntry.value, loginForm.passwordEntry.value);
-    console.log(user);
+    signIn(loginForm.emailEntry.value, loginForm.passwordEntry.value);
 })
 
 const xhttp = new XMLHttpRequest();
