@@ -113,27 +113,47 @@ module.exports = (router) => {
             let permission = validate(req.body.token);
             if (permission) {
                 if (req.body.operation == "ADD") {
-                    connection.query(`INSERT INTO LinkedList (ListID, WordID) VALUES ('${req.body.ListID}', '${req.body.WordID}')`, (req, res) => {
-                        if (err) throw err;
-                        res.json({
-                            message: "Word added successfully"
-                        });
+                    connection.query(`INSERT INTO LinkedList (ListID, WordID) VALUES ('${req.body.ListID}', '${req.body.WordID}')`, (err, response) => {
+                        try {
+                            if (err) throw err;
+                            res.json({
+                                message: "Word added successfully"
+                            });
+                        } catch {
+                            res.status(500);
+                            res.json({
+                                message: "Could not update database"
+                            });
+                        }
                     });
                 } else if (req.body.operation == "DELETE") {
                     //delete word
-                    connection.query(`DELETE FROM LinkedList WHERE WordID=${req.body.WordID}, ListID=${req.body.ListID}`, (err, response) => {
-                        if (err) throw err;
-                        res.json({
-                            message: "Word deleted successfully"
-                        });
+                    connection.query(`DELETE FROM LinkedList WHERE WordID=${req.body.WordID} AND ListID=${req.body.ListID}`, (err, response) => {
+                        try {
+                            if (err) throw err;
+                            res.json({
+                                message: "Word deleted successfully"
+                            });
+                        } catch {
+                            res.status(500);
+                            res.json({
+                                message: "Could not update database"
+                            });
+                        }
                     });
                 } else if (req.body.operation == "UPDATE") {
                     //edit list name
                     connection.query(`UPDATE List SET ListName='${req.body.ListName}' WHERE ListID='${req.body.ListID}'`, (err, response) => {
-                        if (err) throw err;
-                        res.json({
-                            message: "List updated successfully"
-                        });
+                        try {
+                            if (err) throw err;
+                            res.json({
+                                message: "List updated successfully"
+                            });
+                        } catch {
+                            res.status(500);
+                            res.json({
+                                message: "Could not update database"
+                            });}
                     });
                 }
             } else {
@@ -169,7 +189,7 @@ module.exports = (router) => {
             let permission = validate(req.body.token);
             if (permission) {
                 if (permission.Permissions == "ADMIN") {
-                    connection.query(`SELECT WordID, Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status = PENDING`, (err, result) => {
+                    connection.query(`SELECT WordID, Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='PENDING'`, (err, result) => {
                         if (err) throw err;
                         res.json(result);
                     });
