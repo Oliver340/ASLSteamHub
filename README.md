@@ -24,6 +24,19 @@ ASLSteamHub has the following NodeJS dependencies:
 - [mysql](https://www.npmjs.com/package/mysql)
 - [pug](https://www.npmjs.com/package/pug)
 
+### Note on adding new dependencies to Plesk
+
+Plesk isn't exactly the happiest camper when it comes to adding some new dependencies if you aren't an admin. Some dependencies try to run their own scripts and will directly declare `npm` or `node`, but Plesk uses the full route every time. This breaks these scripts and therefore installation.
+
+The easiest way around that is as follows:
+
+1. Install NodeJS onto a Linux VM. WSL2 is the ideal environment for this. Microsoft has a great WSL tutorial [here](https://docs.microsoft.com/en-us/windows/wsl/install), and NodeJS has installation instructions [here](https://nodejs.org/en/download/package-manager/). If you're using Ubuntu, just run `sudo apt install nodejs` and `sudo apt install npm`.
+2. Run `/bin/npm init` in the desired directory. This will create a `package.json`.
+3. Install all desired NodeJS packages with `/bin/npm install package-name --save`.
+4. Compress the resulting `node-modules` folder to a zip or tarball.
+5. Upload the compressed file into your server directory on Plesk. The current directory is `~/server/`. You also might want to consider uploading the resulting `package.json`, but this is not required.
+6. Uncompress the file, and your `node-modules` file should be up to date and work.
+
 ## Adding New Pages
 Express is setup to use the `.pug` template language.
 If a page is created using the `.html` extension, using [html-to-pug](https://html-to-pug.com) is likely the easiest way to convert those pages.
@@ -59,7 +72,7 @@ Currently, there are a few endpoints:
 |`/api/searchLibrary`|`SearchTerm`: __string__|Gets all words like the search term from the approved global dictionary.|
 
 ### What is a __token__?
-When a user signs in, they will be granded a temporary token as a [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken). This key lasts for 12 hours in localstorage and contains the user's UserID and Permission level.
+When a user signs in, they will be granted a temporary token as a [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken). This key lasts for 12 hours in localstorage and contains the user's UserID and Permission level.
 
 This token will automatically get the user's permission level and their UserID for accessing the database. 
 
@@ -145,6 +158,13 @@ CreationDate| datetime	| 'YYYY-MM-DD hh:mm:ss' |
 |---|---|---|---|
 ListID | int | 32 | The list selected|
 WordID | int | 32 | The Word being added to the list|
+
+## HTML Pages
+
+HTML pages are located in the [html](./html) folder.
+
+| Page Name | Description |
+|---|---|
 
 ## TODOs
 - [x] Express routing
