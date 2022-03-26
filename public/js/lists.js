@@ -76,8 +76,8 @@ xhttp.onreadystatechange = function() {
     }
 };
 
-const getWord = function() {
+const getList = function() {
     xhttp.open("POST", endPoint, true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhttp.send();
+    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken")}));
 }();
