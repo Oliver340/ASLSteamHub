@@ -328,13 +328,13 @@ module.exports = (router) => {
 
     router.get('/api/searchLibrary', (req, res) => {
         try {
-            if (req.query.SearchTerm == "") {
+            if (req.query.SearchTerm == "" || req.query.SearchTerm == undefined) {
                 connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });
             } else {
-                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED', Word LIKE '${req.query.SearchTerm}'`, (err, result) => {
+                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '${req.query.SearchTerm}'`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });
