@@ -52,6 +52,7 @@ module.exports = (router) => {
         try {
             connection.query(`SELECT Password, Permissions, UserID FROM User WHERE Email = '${req.body.email}'`, (e, r) => {
                 if (e) throw e;
+                console.log(r);
                 if (bcrypt.compareSync(req.body.password, r[0].Password)) {
                     res.json(jwt.sign(JSON.parse(JSON.stringify(r[0])), secretKey, {
                         expiresIn: "12h",
@@ -288,6 +289,7 @@ module.exports = (router) => {
                     res.json(result);
                 });
             }
+            
         } catch (e) {
             res.status(500);
             res.json({
