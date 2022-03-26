@@ -11,7 +11,7 @@ module.exports = (router) => {
         res.sender('signup');
     });
     
-    router.get('/editList/:id', (req, res) => {
+    router.get('/editList', (req, res) => {
         res.render('editList');
     });
     
@@ -19,19 +19,19 @@ module.exports = (router) => {
         res.render('lists');
     });
     
-    router.get('/sendlist/:id', (req, res) => {
+    router.get('/sendlist', (req, res) => {
         res.render('sendlist');
     });
 
-    router.get('/search/:term', (req, res) => {
+    router.get('/search', (req, res) => {
         res.render('searchresults');
     });
     
-    router.get('/word/:word', (req, res) => {
+    router.get('/word', (req, res) => {
         res.render('wordpage');
     });
     
-    router.get('/submitword', (req, res) => {
+    router.get('/wordSubmission', (req, res) => {
         res.render('wordsubmission');
     });
 
