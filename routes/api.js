@@ -82,26 +82,17 @@ module.exports = (router) => {
         }
     });
 
-    router.post('/api/getList', (req, res) => {
+    router.get('/api/getList', (req, res) => {
         try {
-            let permission = validate(req.body.token);
-            if (permission) {
-                //Look for words
-                connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, List.ListName
-                    FROM Word 
-                    LEFT JOIN LinkedList ON Word.WordID = LinkedList.WordID
-                    LEFT JOIN List ON List.ListID = LinkedList.ListID
-                    WHERE List.ListID=${req.body.ListID} AND List.UserID=${permission.UserID}`, (err, result) => {
-                            if (err) throw err;
-                            console.log(result);
-                            res.json(result);
-                        });
-            } else {
-                res.status(500);
-                res.json({
-                    message: "User must be logged in."
-                })
-            }
+            connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, List.ListName
+                FROM Word 
+                LEFT JOIN LinkedList ON Word.WordID = LinkedList.WordID
+                LEFT JOIN List ON List.ListID = LinkedList.ListID
+                WHERE List.ListID=${req.query.ListID}`, (err, result) => {
+                        if (err) throw err;
+                        console.log(result);
+                        res.json(result);
+                    });
         } catch (e) {
             res.status(500);
             res.json({
