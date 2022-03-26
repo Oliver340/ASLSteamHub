@@ -55,6 +55,7 @@ module.exports = (router) => {
             connection.query(`SELECT Password, Permissions, UserID FROM User WHERE Email = '${req.body.email}'`, (e, r) => {
                 if (e) throw e;
                 console.log(r);
+                console.log(req.body);
                 if (bcrypt.compareSync(req.body.password, r[0].Password)) {
                     console.log(r);
                     let token = {
@@ -69,7 +70,7 @@ module.exports = (router) => {
                 } else {
                     res.status(500);
                     res.json({
-                        message: "Incorrect email or password"
+                        message: "Incorrect password"
                     })
                 }
             });
