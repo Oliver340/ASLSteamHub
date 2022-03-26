@@ -84,7 +84,8 @@ xhttp.onreadystatechange = function() {
 const getList = function() {
     xhttp.open("POST", endPointGetLists, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken")}));
+    let userToken = localStorage.getItem("aslsteamhubtoken");
+    xhttp.send(JSON.stringify({ token: userToken}));
 }();
 
 // Post request to add list

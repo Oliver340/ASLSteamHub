@@ -54,8 +54,6 @@ module.exports = (router) => {
         try {
             connection.query(`SELECT Password, Permissions, UserID FROM User WHERE Email = '${req.body.email}'`, (e, r) => {
                 if (e) throw e;
-                console.log(r);
-                console.log(req.body);
                 if (bcrypt.compareSync(req.body.password, r[0].Password)) {
                     console.log(r);
                     let token = {
