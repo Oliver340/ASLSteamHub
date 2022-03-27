@@ -57,6 +57,7 @@ const libraryContainer = document.getElementById("libraryContainer");
 const xhttp = new XMLHttpRequest();
 const endPoint = "http://localhost:32535/api/library";
 const endPointSearch = "http://localhost:32535/api/searchLibrary";
+const endPointAddWord = "http://localhost:32535/api/editList";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
@@ -100,4 +101,17 @@ const searchDB = function(searchTerm) {
     xhttp.open("GET", endPointSearch, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
     xhttp.send(JSON.stringify({ SearchTerm: searchTerm}));
+};
+
+document.getElementById("addIcon").addEventListener("click", () => {
+    let wordID = this.parentElement.parentElement.id;
+    let listID = sessionStorage.getItem("listID");
+    addWordToList(wordID, listID);
+});
+
+// adds word to user list
+const addWordToList = function(wordID, listID) {
+    xhttp.open("POST", endPointAddWord, true);
+    xhttp.setRequestHeader("Content-Type", "application/JSON");
+    xhttp.send(JSON.stringify({ operation: "ADD", ListID: listID, WordID, wordID}));
 };
