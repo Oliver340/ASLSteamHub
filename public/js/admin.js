@@ -88,14 +88,18 @@ const getWords = function() {
     xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken")}));
 }();
 
-document.getElementById("accept").addEventListener("click", () => {
-    let wordID = this.parentElement.parentElement.id;
-    reviewWord("APPROVE", wordID);
+document.querySelectorAll(".accept").forEach(item => {
+    item.addEventListener("click", (e) => {
+        let wordID = this.parentElement.parentElement.id;
+        reviewWord("APPROVE", wordID);
+    });
 });
 
-document.getElementById("reject").addEventListener("click", () => {
-    let wordID = this.parentElement.parentElement.id;
-    reviewWord("DENY", wordID);
+document.querySelectorAll(".reject").forEach(item => {
+    item.addEventListener("click", (e) => {
+        let wordID = this.parentElement.parentElement.id;
+        reviewWord("DENY", wordID);
+    });
 });
 
 // Accepts or rejects word
