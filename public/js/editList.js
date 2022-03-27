@@ -80,19 +80,22 @@ xhttp.onreadystatechange = function() {
 
 // Sends get req
 const getWords = function() {
+    let listID = sessionStorage.getItem("listID");
+
     xhttp.open("GET", endPointGetList, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ }));
+    xhttp.send(JSON.stringify({ ListID: listID}));
 }();
 
 document.getElementById("deleteIcon").addEventListener("click", () => {
     let wordID = this.parentElement.parentElement.id;
-    reviewWord("DELETE", wordID);
+    let listID = sessionStorage.getItem("listID");
+    editList("DELETE", wordID, listID);
 });
 
 // Edits list
-const editList = function(operation) {
+const editList = function(operation, wordID, listID) {
     xhttp.open("POST", endPointEditList, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: operation, WordID: wordID}));
+    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: operation, WordID: wordID, ListID: listID}));
 };
