@@ -68,6 +68,8 @@ xhttp.onreadystatechange = function() {
                 let sciDef = element.TechDef;
                 let url = element.VideoLink;
                 let wordID = element.WordID;
+                let listName = element.ListName;
+                document.getElementById("listName").value = listName;
                 url = convertLinkToEmbed(url);
                 addWordToLibrary(listContainer, word, url, plainDef, sciDef, wordID);
             });
@@ -80,19 +82,29 @@ xhttp.onreadystatechange = function() {
 
 // Sends get req
 const getWords = function() {
+    let listID = sessionStorage.getItem("listID");
+
     xhttp.open("GET", endPointGetList, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ }));
+    xhttp.send(JSON.stringify({ ListID: listID}));
 }();
 
 document.getElementById("deleteIcon").addEventListener("click", () => {
     let wordID = this.parentElement.parentElement.id;
-    reviewWord("DELETE", wordID);
+    let listID = sessionStorage.getItem("listID");
+    editList("DELETE", wordID, listID);
+});
+
+document.getElementById("listName").addEventListener("change", () => {
+    let listID = sessionStorage.getItem("listID");
+    let listName = document.getElementById("listName").value;
+    editList("UPDATE", wordID, listID, listName);
 });
 
 // Edits list
-const editList = function(operation) {
+const editList = function(operation, wordID, listID, listName) {
     xhttp.open("POST", endPointEditList, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: operation, WordID: wordID}));
+    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: operation,
+        WordID: wordID, ListID: listID, ListName: listName}));
 };

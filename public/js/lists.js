@@ -36,10 +36,11 @@
 const listContainer = document.getElementById("listContainer");
 
 //Function loads list to page
-let updateLists = (listName) => {
+let updateLists = (listName, listID) => {
     let element = document.createElement("div");
     element.className = "lists";
     element.textContent = listName;
+    element.id = listID;
 
     let image = document.createElement("img");
     image.id = "mailIcon";
@@ -71,7 +72,8 @@ xhttp.onreadystatechange = function() {
             let jsonData = JSON.parse(xhttp.response);
             jsonData.forEach(element => {
                 let listName = element.ListName;
-                updateLists(listName);
+                let listID = element.ListID;
+                updateLists(listName, listID);
             });
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
@@ -87,6 +89,13 @@ const getList = function() {
     let userToken = localStorage.getItem("aslsteamhubtoken");
     xhttp.send(JSON.stringify({ token: userToken}));
 }();
+
+document.querySelectorAll(".editIcon").forEach(item => {
+    item.addEventListener("click", (e) => {
+        let listID = this.parentElement.id;
+        sessionStorage.setItem('listID', listID);
+    });
+});
 
 // Post request to add list
 document.getElementById("addList").onclick = function () {
