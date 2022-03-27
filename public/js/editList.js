@@ -1,5 +1,5 @@
 // Function to add a word to the page with delete icon
-let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
+let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
 
     let wordContainer = document.createElement("div");
     let headerElement = document.createElement("h2");
@@ -11,6 +11,7 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
     let sd = document.createElement("p");
 
     wordContainer.className = "wordContainer";
+    wordContainer.id = wordID;
     headerElement.id = word.toLowerCase();
     headerElement.textContent = word;
     deleteIcon.className = "deleteIcon";
@@ -65,8 +66,9 @@ xhttp.onreadystatechange = function() {
                 let plainDef = element.PlainDef;
                 let sciDef = element.TechDef;
                 let url = element.VideoLink;
+                let wordID = element.WordID;
                 url = convertLinkToEmbed(url);
-                addWordToLibrary(listContainer, word, url, plainDef, sciDef);
+                addWordToLibrary(listContainer, word, url, plainDef, sciDef, wordID);
             });
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);

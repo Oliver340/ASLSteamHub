@@ -13,7 +13,9 @@ const endPoint = "http://localhost:32535/api/signup";
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
+            let jsonData = JSON.parse(xhttp.response);
             window.location.href = "home.html";
+            localStorage.setItem(token, jsonData.token)
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
             document.getElementById("signUpContainer").innerHTML = jsonData.message;
