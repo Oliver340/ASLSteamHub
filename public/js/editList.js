@@ -63,6 +63,7 @@ xhttp.onreadystatechange = function() {
         if (xhttp.status == 200) {
             let jsonData = JSON.parse(xhttp.response);
             jsonData.forEach(element => {
+                console.log(element);
                 let word = element.Word;
                 let plainDef = element.PlainDef;
                 let sciDef = element.TechDef;
@@ -84,15 +85,17 @@ xhttp.onreadystatechange = function() {
 const getWords = function() {
     let listID = sessionStorage.getItem("listID");
 
-    xhttp.open("GET", endPointGetList, true);
+    xhttp.open("GET", endPointGetList + `/${listID}`, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ ListID: listID}));
+    xhttp.send();
 }();
 
-document.getElementById("deleteIcon").addEventListener("click", () => {
-    let wordID = this.parentElement.parentElement.id;
-    let listID = sessionStorage.getItem("listID");
-    editList("DELETE", wordID, listID);
+document.querySelectorAll(".deleteIcon").forEach(item => {
+    item.addEventListener("click", () => {
+        let wordID = this.parentElement.parentElement.id;
+        let listID = sessionStorage.getItem("listID");
+        editList("DELETE", wordID, listID);
+    })
 });
 
 document.getElementById("listName").addEventListener("change", () => {

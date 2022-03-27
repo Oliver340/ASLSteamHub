@@ -55,7 +55,6 @@ module.exports = (router) => {
             connection.query(`SELECT Password, Permissions, UserID FROM User WHERE Email = '${req.body.email}'`, (e, r) => {
                 if (e) throw e;
                 if (bcrypt.compareSync(req.body.password, r[0].Password)) {
-                    console.log(r);
                     let token = {
                         token: jwt.sign({
                             Permissions: r[0].Permissions,
@@ -80,15 +79,14 @@ module.exports = (router) => {
         }
     });
 
-    router.get('/api/getList', (req, res) => {
+    router.get('/api/getList/:ListID', (req, res) => {
         try {
             connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, List.ListName
                 FROM Word 
                 LEFT JOIN LinkedList ON Word.WordID = LinkedList.WordID
                 LEFT JOIN List ON List.ListID = LinkedList.ListID
-                WHERE List.ListID='${req.query.ListID}'`, (err, result) => {
+                WHERE List.ListID='${req.params.ListID}'`, (err, result) => {
                         if (err) throw err;
-                        console.log(result);
                         res.json(result);
                     });
         } catch (e) {
@@ -319,15 +317,15 @@ module.exports = (router) => {
         }
     });
 
-    router.get('/api/searchLibrary', (req, res) => {
+    router.get('/api/searchLibrary/:SearchTerm', (req, res) => {
         try {
-            if (req.query.SearchTerm == "" || req.query.SearchTerm == undefined) {
+            if (req.params.SearchTerm == "" || req.params.SearchTerm == undefined) {
                 connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });
             } else {
-                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '${req.query.SearchTerm}'`, (err, result) => {
+                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '${req.params.SearchTerm}'`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });

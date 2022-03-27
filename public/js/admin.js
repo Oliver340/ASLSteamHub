@@ -15,9 +15,9 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
     wordContainer.id = wordID;
     headerElement.id = word.toLowerCase();
     headerElement.textContent = word;
-    acceptIcon.id = "accept";
+    acceptIcon.className = "accept";
     acceptIcon.textContent = "Accept";
-    rejectIcon.id = "reject";
+    rejectIcon.className = "reject";
     rejectIcon.textContent = "Reject";
     headerElement.appendChild(acceptIcon);
     headerElement.appendChild(rejectIcon);
@@ -35,8 +35,7 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
     wordContainer.appendChild(pd);
     wordContainer.appendChild(hsd);
     wordContainer.appendChild(sd);
-
-    parentElement.innerHTML = '';
+    
     parentElement.appendChild(wordContainer);
 
 }
