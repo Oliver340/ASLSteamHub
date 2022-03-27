@@ -1,22 +1,19 @@
 const updateProfileForm = document.querySelector("#changeProfile");
 
-updateProfileForm.addEventListener("change", (e) => {
-    if (updateProfileForm.passwordEntry.value != updateProfileForm.confirmPasswordEntry.value) {
-        updateProfileForm.submitForm.disabled = true;
-    } else {
-        updateProfileForm.submitForm.disabled = false;
-    }
-})
+// updateProfileForm.addEventListener("change", (e) => {
+//     if (updateProfileForm.passwordEntry.value != updateProfileForm.confirmPasswordEntry.value) {
+//         updateProfileForm.submitForm.disabled = true;
+//     } else {
+//         updateProfileForm.submitForm.disabled = false;
+//     }
+// })
 
 updateProfileForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (updateProfileForm.fullName.value != user.fullName) {
-        user.fullName = updateProfileForm.fullName.value;
+    if (updateProfileForm.fullName.value == "" || updateProfileForm.emailEntry.value == "") {
+        alert("Please enter a valid name or email.");
     }
-    if (updateProfileForm.email.value != user.email) {
-        user.email = updateProfileForm.email.value;
-    }
-    sendPassword(user.fullName, user.email);
+    sendPassword(updateProfileForm.fullName.value, updateProfileForm.emailEntry.value);
 })
 
 const xhttp = new XMLHttpRequest();
@@ -30,7 +27,7 @@ xhttp.onreadystatechange = function() {
                 let name = element.FullName;
                 let email = element.Email;
                 updateProfileForm.fullName.value = name;
-                updateProfileForm.email.value = email;
+                updateProfileForm.emailEntry.value = email;
             });
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
