@@ -97,6 +97,13 @@ document.querySelectorAll(".editIcon").forEach(item => {
     });
 });
 
+document.querySelectorAll(".mailIcon").forEach(item => {
+    item.addEventListener("click", (e) => {
+        let listID = this.parentElement.id;
+        sessionStorage.setItem('listID', listID);
+    });
+});
+
 // Post request to add list
 document.getElementById("addList").onclick = function () {
     let listname = "List";
