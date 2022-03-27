@@ -35,7 +35,6 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
     wordContainer.appendChild(pd);
     wordContainer.appendChild(hsd);
     wordContainer.appendChild(sd);
-    
     parentElement.appendChild(wordContainer);
 
 }

@@ -33,7 +33,6 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
     wordContainer.appendChild(hsd);
     wordContainer.appendChild(sd);
 
-    parentElement.innerHTML = '';
     parentElement.appendChild(wordContainer);
 
 }
