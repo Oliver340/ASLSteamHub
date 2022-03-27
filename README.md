@@ -131,7 +131,7 @@ Note that Primary keys are generated with the `UUID` function.
 
 |Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
 |---|---|---|---|
-|UserID 	| int   | 32 | UserID currently auto increments|
+|UserID 	| varchar 	| 36 | UserID currently auto increments|
 |FullName| varchar	| 32 | Name/Username of the account|
 |Email 	| varchar	| 32 | Email associated with the account|
 |Password| varchar 	| 32 | Password is hashed with bcrypt with a 12 round salt|
@@ -146,8 +146,8 @@ Note that Primary keys are generated with the `UUID` function.
 
 |Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
 |---|---|---|---|
-ListID      | int		| 32 | ListID currently auto increments|
-UserID      | int 		| 32 | |
+ListID      | varchar 	| 36 | ListID currently auto increments|
+UserID      | varchar 	| 36 | |
 ListName    | varchar	| 32 | Name of the list chosen by the user. |
 CreationDate| datetime	| 'YYYY-MM-DD hh:mm:ss' | 
 
@@ -161,8 +161,8 @@ CreationDate| datetime	| 'YYYY-MM-DD hh:mm:ss' |
 
 |Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
 |---|---|---|---|
-ListID | int | 32 | The list selected|
-WordID | int | 32 | The Word being added to the list|
+ListID | varchar 	| 36 | The list selected|
+WordID | varchar 	| 36 | The Word being added to the list|
 
 ## HTML Pages
 
