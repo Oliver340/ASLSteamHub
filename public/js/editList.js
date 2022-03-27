@@ -33,6 +33,7 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
     wordContainer.appendChild(hsd);
     wordContainer.appendChild(sd);
 
+    parentElement.innerHTML = '';
     parentElement.appendChild(wordContainer);
 
 }
@@ -85,12 +86,13 @@ const getWords = function() {
 }();
 
 document.getElementById("deleteIcon").addEventListener("click", () => {
-    reviewWord("DELETE");
+    let wordID = this.parentElement.parentElement.id;
+    reviewWord("DELETE", wordID);
 });
 
 // Edits list
 const editList = function(operation) {
     xhttp.open("POST", endPointEditList, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: operation}));
+    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: operation, WordID: wordID}));
 };

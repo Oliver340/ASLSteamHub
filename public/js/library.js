@@ -1,14 +1,3 @@
-const searchbar = document.getElementById("searchbar");
-const searchButton = document.getElementById("searchIcon");
-// Functions to search
-searchbar.addEventListener("keyup", ({key}) => {
-    if (key === "Enter") {
-        location.href='#' + searchbar.value.toLowerCase();
-    }
-});
-searchButton.onclick = () => {
-    location.href='#' + searchbar.value.toLowerCase();
-}
 
 // Function to add a word to the page
 let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
@@ -44,6 +33,7 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
     wordContainer.appendChild(hsd);
     wordContainer.appendChild(sd);
 
+    parentElement.innerHTML = '';
     parentElement.appendChild(wordContainer);
 
 }
@@ -66,6 +56,7 @@ let convertLinkToEmbed = (ytURL) => {
 const libraryContainer = document.getElementById("libraryContainer");
 const xhttp = new XMLHttpRequest();
 const endPoint = "http://localhost:32535/api/library";
+const endPointSearch = "http://localhost:32535/api/searchLibrary";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
@@ -91,3 +82,22 @@ const getWords = function() {
     xhttp.open("GET", endPoint, true);
     xhttp.send();
 }();
+
+const searchbar = document.getElementById("searchbar");
+const searchButton = document.getElementById("searchIcon");
+// Functions to search
+searchbar.addEventListener("keyup", ({key}) => {
+    if (key === "Enter") {
+        searchDB(searchbar.value);
+    }
+});
+searchButton.onclick = () => {
+    searchDB(searchbar.value);
+}
+
+// Search db
+const searchDB = function(searchTerm) {
+    xhttp.open("GET", endPointSearch, true);
+    xhttp.setRequestHeader("Content-Type", "application/JSON");
+    xhttp.send(JSON.stringify({ SearchTerm: searchTerm}));
+};
