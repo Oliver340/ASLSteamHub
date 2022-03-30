@@ -55,7 +55,6 @@ module.exports = (router) => {
             connection.query(`SELECT Password, Permissions, UserID FROM User WHERE Email = '${req.body.email}'`, (e, r) => {
                 if (e) throw e;
                 if (bcrypt.compareSync(req.body.password, r[0].Password)) {
-                    console.log(r);
                     let token = {
                         token: jwt.sign({
                             Permissions: r[0].Permissions,
@@ -80,15 +79,14 @@ module.exports = (router) => {
         }
     });
 
-    router.get('/api/getList', (req, res) => {
+    router.get('/api/getList/:ListID', (req, res) => {
         try {
             connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, List.ListName
                 FROM Word 
                 LEFT JOIN LinkedList ON Word.WordID = LinkedList.WordID
                 LEFT JOIN List ON List.ListID = LinkedList.ListID
-                WHERE List.ListID=${req.query.ListID}`, (err, result) => {
+                WHERE List.ListID='${req.params.ListID}'`, (err, result) => {
                         if (err) throw err;
-                        console.log(result);
                         res.json(result);
                     });
         } catch (e) {
@@ -119,7 +117,7 @@ module.exports = (router) => {
                     });
                 } else if (req.body.operation == "DELETE") {
                     //delete word
-                    connection.query(`DELETE FROM LinkedList WHERE WordID=${req.body.WordID} AND ListID=${req.body.ListID}`, (err, response) => {
+                    connection.query(`DELETE FROM LinkedList WHERE WordID='${req.body.WordID}' AND ListID='${req.body.ListID}'`, (err, response) => {
                         try {
                             if (err) throw err;
                             res.json({
@@ -199,13 +197,14 @@ module.exports = (router) => {
             let permission = validate(req.body.token);
             if (permission) {
                 if (req.body.operation == "GET") {
-                    connection.query(`SELECT FullName, Email FROM User WHERE UserID=${permission.UserID}`, (err, result) => {
+                    connection.query(`SELECT FullName, Email FROM User WHERE UserID='${permission.UserID}'`, (err, result) => {
                         if (err) throw err;
                         res.json(result);
                     });
                 } else if (req.body.operation == "UPDATE") {
-                    connection.query(`UPDATE User SET FullName='${req.body.FullName}', Email='${req.body.Email}' WHERE UserID=${permission.UserID}`, (err, result) => {
+                    connection.query(`UPDATE User SET FullName='${req.body.FullName}', Email='${req.body.Email}' WHERE UserID='${permission.UserID}'`, (err, result) => {
                         if (err) throw err;
+                        res.status(202);
                         res.json({
                             message: "Updated user successfully"
                         });
@@ -257,7 +256,7 @@ module.exports = (router) => {
                             });
                         });
                     } else if (req.body.operation == "DENY") {
-                        connection.query(`DELETE FROM Word WHERE WordID=${req.body.WordID}`, (err, result) => {
+                        connection.query(`DELETE FROM Word WHERE WordID='${req.body.WordID}'`, (err, result) => {
                             if (err) throw err;
                             res.json({
                                 message: "Word successfully deleted."
@@ -304,7 +303,7 @@ module.exports = (router) => {
         try {
             let permission = validate(req.body.token);
             if (permission) {
-                connection.query(`SELECT ListID, ListName FROM List WHERE UserID=${permission.UserID}`, (err, result) => {
+                connection.query(`SELECT ListID, ListName FROM List WHERE UserID='${permission.UserID}'`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });
@@ -318,15 +317,15 @@ module.exports = (router) => {
         }
     });
 
-    router.get('/api/searchLibrary', (req, res) => {
+    router.get('/api/searchLibrary/:SearchTerm', (req, res) => {
         try {
-            if (req.query.SearchTerm == "" || req.query.SearchTerm == undefined) {
+            if (req.params.SearchTerm == "" || req.params.SearchTerm == undefined) {
                 connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });
             } else {
-                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '${req.query.SearchTerm}'`, (err, result) => {
+                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '${req.params.SearchTerm}'`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });

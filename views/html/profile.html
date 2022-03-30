@@ -1,0 +1,41 @@
+<!-- Page where you can edit your account information, log out and go to admin view to accept or reject words
+    if you are authorized. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+    <header>
+        <image id="logo" src="../images/logo.png" alt="logoImage"></image>
+        <image id="homeIcon" src="../images/homeicon.png" alt="homeIcon" onclick="logoClick()"></image>
+    </header>
+
+    <h1>
+        <image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>
+        Settings
+        <button id="adminView" onclick="location.href='admin.html'">Admin View</button>
+    </h1>
+    
+    <div id="settingsContainer">
+        <h2>Change your account details</h2>
+        <form id="changeProfile">
+            <label for="fullName">Full Name: </label>
+            <input id="fullName" type="text" placeholder="Full Name">
+            <label for="emailEntry">Email:</label>
+            <input id="emailEntry" type="text" placeholder="Email">
+            <!-- <label for="passwordEntry">Password:</label>
+            <input id="passwordEntry" type="password" placeholder="Password">
+            <label for="confirmPasswordEntry">Confirm Password:</label>
+            <input id="confirmPasswordEntry" type="password" placeholder="Confirm Password"> -->
+            <input id="submitForm" type="submit" value="Save Changes"/>
+        </form>
+        <button id="signOut" onclick="location.href='signIn.html'">Log Out</button>
+    </div>
+    <script src="../js/homeIcon.js"></script>
+</body>
+</html>

@@ -47,4 +47,7 @@ module.exports = (router) => {
         res.render('FAQ');
     });
     
+    router.get('/profile', (req, res) => {
+        res.render('profile')
+    })
 };

@@ -65,14 +65,14 @@ Currently, there are a few endpoints:
 |---|---|---|
 |`/api/signup`|`email`: __string__<br>`name`: __string__<br>`password`: __string__|Signs a new user up for an account|
 |`/api/signIn`|`email`: __string__<br>`password`: __string__|Signs an existing user into their account|
-|`/api/getList`|`token`: __string__<br>`ListID`: __int__|Get the specified list|
-|`/api/editList`|`token`: __string__<br>`operation`: __enum__<br>`ListID`: __int__<br>`WordID`: __int__<br>`ListName`: __string__|Add a word to a specified list.<br>Delete a word from a specified list.<br>Update list name.<br><br>Valid options for `operation`:<br>`ADD`<br>`DELETE`<br>`UPDATE`
+|`/api/getList`|`token`: __string__<br>`ListID`: __string__|Get the specified list|
+|`/api/editList`|`token`: __string__<br>`operation`: __enum__<br>`ListID`: __string__<br>`WordID`: __string__<br>`ListName`: __string__|Add a word to a specified list.<br>Delete a word from a specified list.<br>Update list name.<br><br>Valid options for `operation`:<br>`ADD`<br>`DELETE`<br>`UPDATE`
 |`/api/addWord`|`token`: __string__<br>`Word`: __string__<br>`PlainDef`: __string__<br>`TechDef`: __string__<br>`VideoLink`: __string__|Add a word to the pending global dictionary|
 |`/api/library`||Get all words in the approved global dictionary|
 |`/api/admin`|`token`: __string__|Get all pending global words|
 |`/api/profile`|`token`: __string__<br>`operation`: __enum__|Get or update user profile.<br>Valid options for `operation`:<br>`GET`<br>`UPDATE`|
 |`/api/createNewList`|`token`: __string__<br>`ListName`: __string__|Create a new list owned by the logged in user.
-|`/api/modifyPendingWord`|`token`: __string__<br>`operation`: __enum__<br>`Word`: __string__<br>`PlainDef`: __string__<br>`TechDef`: __string__<br>`VideoLink`: __string__<br>`Status`: __string__<br>`WordID`: __int__|Approve, deny, or update a pending word. User must be an admin to perform this.<br>Valid options for `operation`:<br>`ADD`<br>`DELETE`<br>`UPDATE`|
+|`/api/modifyPendingWord`|`token`: __string__<br>`operation`: __enum__<br>`Word`: __string__<br>`PlainDef`: __string__<br>`TechDef`: __string__<br>`VideoLink`: __string__<br>`Status`: __string__<br>`WordID`: __string__|Approve, deny, or update a pending word. User must be an admin to perform this.<br>Valid options for `operation`:<br>`ADD`<br>`DELETE`<br>`UPDATE`|
 |`/api/getUserLists`|`token`: __string__|Get all the lists associated with the user.|
 |`/api/searchLibrary`|`SearchTerm`: __string__|Gets all words like the search term from the approved global dictionary.|
 
@@ -112,8 +112,8 @@ Note that Primary keys are generated with the `UUID` function.
 
 |Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
 |---|---|---|---|
-|WordID 	 | int 	| 32 	| WordID currently auto increments|
-|UserID 	 | int 	| 32 	| User who submitted the word|
+|WordID 	 | varchar 	| 36	| WordID currently auto increments|
+|UserID 	 | varchar 	| 36 	| User who submitted the word|
 |Word 	 | varchar 	| 32	| |
 |PlainDef | varchar	| 1000	| Plain definition of word|
 |TechDef  | varchar	| 1000	| Technical definition of word|
@@ -131,7 +131,7 @@ Note that Primary keys are generated with the `UUID` function.
 
 |Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
 |---|---|---|---|
-|UserID 	| int   | 32 | UserID currently auto increments|
+|UserID 	| varchar 	| 36 | UserID currently auto increments|
 |FullName| varchar	| 32 | Name/Username of the account|
 |Email 	| varchar	| 32 | Email associated with the account|
 |Password| varchar 	| 32 | Password is hashed with bcrypt with a 12 round salt|
@@ -146,8 +146,8 @@ Note that Primary keys are generated with the `UUID` function.
 
 |Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
 |---|---|---|---|
-ListID      | int		| 32 | ListID currently auto increments|
-UserID      | int 		| 32 | |
+ListID      | varchar 	| 36 | ListID currently auto increments|
+UserID      | varchar 	| 36 | |
 ListName    | varchar	| 32 | Name of the list chosen by the user. |
 CreationDate| datetime	| 'YYYY-MM-DD hh:mm:ss' | 
 
@@ -161,8 +161,8 @@ CreationDate| datetime	| 'YYYY-MM-DD hh:mm:ss' |
 
 |Column Name | DataType | Character Limit or accepted Enums | Additional Notes|
 |---|---|---|---|
-ListID | int | 32 | The list selected|
-WordID | int | 32 | The Word being added to the list|
+ListID | varchar 	| 36 | The list selected|
+WordID | varchar 	| 36 | The Word being added to the list|
 
 ## HTML Pages
 
