@@ -29,6 +29,12 @@ header {
     width: 5vh;
     margin: 3%;
 }
+
+#cancelIcon {
+    width: 5vh;
+    margin: 3%;
+}
+
 #signUpButton {
     margin: 2%;
     border-radius: 20px;
@@ -50,10 +56,10 @@ footer {
     align-self: center;
     margin: 5%;
     width: 70%;
-    height: 3%;
+    height: 3vmin;
     margin-left: 15%;
+    margin-right: 0;
 
-    background-color: rgb(172,175,185);
     padding: 3vmin;
     background-color: rgb(192, 192, 192);
     border-radius: 1em;
@@ -63,10 +69,20 @@ footer {
     
     font-size: large;
 }
+#searchIcon {
+    border-radius: 1em;
+    background-color: rgb(192, 192, 192);
+    height: 4vmin;
+    width: auto;
+    padding: 1vmin;
+    margin-top: 5%;
+    position: absolute;
+}
 h1 {
     border-bottom: solid;
     padding: 1vmin 2vmin 2vmin 0vmin;
 	font-size: 2.5em;
     display: flex;
     align-items: center;
+    font: bolder;
 }

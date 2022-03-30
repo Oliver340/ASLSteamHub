@@ -1,3 +1,6 @@
+//
+  Page where you can enter information for someone's email and other details
+  and it will send them a list of words for them to view.
 head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
@@ -7,4 +10,14 @@ head
   link(rel='stylesheet' href='../css/sendList.css')
 header
   image#logo(src='../images/logo.png' alt='logoImage')
-  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick="location.href='http://localhost:32535/home';")
+  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick='logoClick()')
+h1
+  image#backIcon(src='../images/backicon.png' alt='backIcon' onclick='history.back()')
+  | Send List
+form#mailContainer
+  input#subjectEntry(type='text' placeholder='Auto filled with list name')
+  input#emailEntry(type='text' placeholder='Email')
+  textarea#messageEntry(type='text' placeholder='Standard message autofilled but editable')
+  button#sendEmail(type='button') Send
+script(src='../js/sendList.js')
+script(src='../js/homeIcon.js')

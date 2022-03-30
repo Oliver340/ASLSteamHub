@@ -1,13 +1,15 @@
-<!-- Page where it would have your profile and list of lists. -->
+<!-- Page where it has the list of all the words in the database, you can add them to your list,
+    search for a specific word or add a new word to the database. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List</title>
+    <title>Library</title>
     <script src="../js/firebase.js"></script>
     <link rel="stylesheet" href="../css/general.css">
     <link rel="stylesheet" href="../css/library.css">
+
 </head>
 <body>
     
@@ -19,25 +21,11 @@
     <h1><image id="backIcon" src="../images/backicon.png" alt="backIcon" onclick="history.back()" ></image>Library</h1>
 
     <input id="searchbar" type="text" placeholder="Search...">
+    <image id="searchIcon" src="../images/searchicon.png" alt="searchIcon"></image>
+    
     
     <div id="libraryContainer">
         <button id="addWord" onclick="location.href='wordSubmission.html';">+ new word</button>
-        <div class="wordContainer">
-            <h2 id="canada">Canada<image class="addIcon" src="../images/addtofoldericon.png" alt="addIcon"></image></h2>
-            <iframe src="https://www.youtube.com/embed/IA3J6LFtVzY"></iframe>
-            <h4>Plain Definition</h4>
-            <p class="plainDesc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos nemo eum voluptatem vel! Labore laudantium, excepturi earum, ipsam sunt deserunt, deleniti totam voluptas dignissimos blanditiis natus alias? Quae magnam explicabo numquam amet unde praesentium voluptatum modi enim quis eveniet laudantium incidunt sapiente aut autem in, earum, molestias eaque ipsa omnis natus non vero et porro architecto? Vitae debitis qui nihil cupiditate?</p>
-            <h4>Scientific Definition</h4>
-            <p class="scientificDesc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo alias rem nam tempore voluptate mollitia, natus nisi. Laboriosam cupiditate, provident iste nihil nesciunt pariatur molestias distinctio beatae adipisci earum. Adipisci!</p>
-        </div>
-        <div class="wordContainer">
-            <h2 id="hello">Hello<image class="addIcon" src="../images/addtofoldericon.png" alt="addIcon"></image></h2>
-            <iframe src="https://www.youtube.com/embed/QB44Vddoi-w"></iframe>
-            <h4>Plain Definition</h4>
-            <p class="plainDesc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos nemo eum voluptatem vel! Labore laudantium, excepturi earum, ipsam sunt deserunt, deleniti totam voluptas dignissimos blanditiis natus alias? Quae magnam explicabo numquam amet unde praesentium voluptatum modi enim quis eveniet laudantium incidunt sapiente aut autem in, earum, molestias eaque ipsa omnis natus non vero et porro architecto? Vitae debitis qui nihil cupiditate?</p>
-            <h4>Scientific Definition</h4>
-            <p class="scientificDesc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo alias rem nam tempore voluptate mollitia, natus nisi. Laboriosam cupiditate, provident iste nihil nesciunt pariatur molestias distinctio beatae adipisci earum. Adipisci!</p>
-        </div>
     </div>
     
     <script src="../js/library.js"></script>

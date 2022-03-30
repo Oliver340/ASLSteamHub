@@ -1,5 +1,5 @@
 #libraryContainer {
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 #libraryContainer > * {
     margin: 2vmin;
@@ -24,9 +24,46 @@
     margin: 10px;
 }
 .addicon {
-    width: 35px;
-    margin-left: 25px;
+    width: 45px;
+    margin-left: 20px;
 }
 .wordContainer > p {
-    font-size: 0.75em;
+    font-size: 25px;
+}
+
+.wordContainer > h4 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.wordContainer > h2 {
+    font-size: 45px;
+    font: 900;
+}
+
+#searchIcon {
+    width: 30px;
+    height: auto;
+    margin-left: 5px;
+    
+}
+
+#searchbar {
+    margin-left: 10%;
+    width: 75%;
+    height: 5%;
+    font-weight: 550;
+    color: rgba(0,0,0,0.2);
+}
+
+#addWord {
+    margin-top: -2px;
+    margin-bottom: 15px;
+    margin-left: 20%;
+    width: 55%;
+    height: 4%;
+    border-radius: 0.5em;
+    border-style: solid;
+    border-color: #5c5c5c;
+    border-width: 1.5px;
 }

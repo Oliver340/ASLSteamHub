@@ -1,0 +1,19 @@
+//
+  Page that allows the admin to view the pending words that user's have submitted and accept or reject them from
+  the database.
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Admin
+  link(rel='stylesheet' href='../css/general.css')
+  link(rel='stylesheet' href='../css/admin.css')
+header
+  image#logo(src='../images/logo.png' alt='logoImage')
+  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick='logoClick()')
+h1
+  image#backIcon(src='../images/backicon.png' alt='backIcon' onclick='history.back()')
+  | Admin
+#listContainer
+script(src='../js/homeIcon.js')
+script(src='../js/admin.js')

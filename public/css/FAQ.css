@@ -1,0 +1,21 @@
+#FAQContainer > * {
+    margin: 2vmin;
+}
+.questionContainer {
+    background-color: #c8c9cc;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 5vmin;
+    border-radius: 20px;
+}
+.questionContainer > * {
+    margin: 10px;
+}
+.questionContainer > p {
+    font-size: 1.5em;
+}
+.question {
+    font-weight: bold;
+    font-style: italic;
+}

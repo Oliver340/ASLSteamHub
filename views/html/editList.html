@@ -1,4 +1,4 @@
-<!-- Page where you would edit your lists. -->
+<!-- Page where a user can add and remove words from their list and change their list names. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,6 +20,7 @@
     <form>
         <label for="listName">List Name: </label>
         <input type="text" id="listName" name="listName" value="List 1">
+        <image id="mailIcon" src="../images/mailicon.png" alt="mailIcon" onclick = "location.href='sendList.html';"></image>
     </form>
     
     <div id="listContainer">
@@ -38,7 +39,6 @@
         <div class="wordContainer">
             <h2 id="hello">Hello
                 <image class="deleteIcon" src="../images/deleteicon.png" alt="deleteIcon"></image>
-                <image id="mailIcon" src="../images/mailicon.png" alt="mailIcon" onclick = "location.href='sendList.html';"></image>
             </h2>
             <iframe src="https://www.youtube.com/embed/QB44Vddoi-w"></iframe>
             <h4>Plain Definition</h4>
@@ -49,5 +49,6 @@
     </div>
     
     <script src="../js/homeIcon.js"></script>
+    <script src="../js/editList.js"></script>
 </body>
 </html>

@@ -29,21 +29,23 @@ module.exports = (router) => {
             bcrypt.hash(req.body.password, saltRounds, (err, salt) => {
                 connection.query(`INSERT INTO User (UserID, FullName, Email, Password) VALUES (UUID(), '${name}', '${email}', '${salt}');`, (err, result) => {
                     if (err) throw err;
-                    connection.query(`SELECT Permissions FROM User WHERE Password = '${salt}'`, (err, resp) =>{
-                        console.long
-                        res.json(jwt.sign({
-                            password: salt,
-                            admin: resp
-                        }, secretKey, {
-                            expiresIn: "12h",
-                        }));
+                    connection.query(`SELECT Permissions, UserID FROM User WHERE Password = '${salt}'`, (err, resp) =>{
+                        if (err) throw err;
+                        res.json({
+                            token: jwt.sign({
+                                Permissions: resp.Permissions,
+                                UserID: resp.UserID
+                            }, secretKey, {
+                                expiresIn: "12h",
+                            })
+                        });
                     })
                 });
             });
-        } catch {
+        } catch (e) {
+            res.status(500);
             res.json({
-                code: 400,
-                message: "An error occurred. :("
+                message: e.message
             });
         }
     });
@@ -53,71 +55,287 @@ module.exports = (router) => {
             connection.query(`SELECT Password, Permissions, UserID FROM User WHERE Email = '${req.body.email}'`, (e, r) => {
                 if (e) throw e;
                 if (bcrypt.compareSync(req.body.password, r[0].Password)) {
-                    res.json(jwt.sign(JSON.parse(JSON.stringify(r[0])), secretKey, {
-                        expiresIn: "12h",
-                    }));
+                    console.log(r);
+                    let token = {
+                        token: jwt.sign({
+                            Permissions: r[0].Permissions,
+                            UserID: r[0].UserID
+                        }, secretKey, {
+                            expiresIn: "12h",
+                        })
+                    }
+                    res.json(token);
+                } else {
+                    res.status(500);
+                    res.json({
+                        message: "Incorrect password"
+                    })
                 }
             });
-        } catch {
+        } catch (e) {
+            res.status(500);
             res.json({
-                code: 400,
-                message: "Something went wrong"
+                message: "Incorrect email or password"
             });
         }
     });
 
-    router.post('/api/lists', (req, res) => {
-        let permission = validate(req.body.token);
-        if (permission) {
-            //Look for words
-            connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, List.ListID
+    router.get('/api/getList', (req, res) => {
+        try {
+            connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, List.ListName
                 FROM Word 
                 LEFT JOIN LinkedList ON Word.WordID = LinkedList.WordID
-                LEFT JOIN List ON List.ListID = LinkedList.WordID
-                WHERE List.UserID = ${permission.UserID}`, (err, result) => {
+                LEFT JOIN List ON List.ListID = LinkedList.ListID
+                WHERE List.ListID=${req.query.ListID}`, (err, result) => {
                         if (err) throw err;
+                        console.log(result);
                         res.json(result);
                     });
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "An error occured"
+            })
         }
     });
 
-    router.post('/api/addWord', (req, res) => {
-        let permission = validate(req.body.token);
-        if (permission) {
-            connection.query(`INSERT INTO LinkedList (ListID, WordID) VALUES (${permission.ListID}, ${permission.WordID})`, (req, res) => {
+    router.post('/api/editList', (req, res) => {
+        try {
+            let permission = validate(req.body.token);
+            if (permission) {
+                if (req.body.operation == "ADD") {
+                    connection.query(`INSERT INTO LinkedList (ListID, WordID) VALUES ('${req.body.ListID}', '${req.body.WordID}')`, (err, response) => {
+                        try {
+                            if (err) throw err;
+                            res.json({
+                                message: "Word added successfully"
+                            });
+                        } catch {
+                            res.status(500);
+                            res.json({
+                                message: "Could not update database"
+                            });
+                        }
+                    });
+                } else if (req.body.operation == "DELETE") {
+                    //delete word
+                    connection.query(`DELETE FROM LinkedList WHERE WordID=${req.body.WordID} AND ListID=${req.body.ListID}`, (err, response) => {
+                        try {
+                            if (err) throw err;
+                            res.json({
+                                message: "Word deleted successfully"
+                            });
+                        } catch {
+                            res.status(500);
+                            res.json({
+                                message: "Could not update database"
+                            });
+                        }
+                    });
+                } else if (req.body.operation == "UPDATE") {
+                    //edit list name
+                    connection.query(`UPDATE List SET ListName='${req.body.ListName}' WHERE ListID='${req.body.ListID}'`, (err, response) => {
+                        try {
+                            if (err) throw err;
+                            res.json({
+                                message: "List updated successfully"
+                            });
+                        } catch {
+                            res.status(500);
+                            res.json({
+                                message: "Could not update database"
+                            });}
+                    });
+                }
+            } else {
+                res.status(500);
                 res.json({
-                    code: 200,
-                    message: "Word added successfully"
+                    message: "User must be logged in"
                 });
+            }
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Could not update database"
             });
         }
-    })
+    });
     
     router.get('/api/library', (req, res) => {
-        let permission = validate(req.body.token);
-        if (permission) {
-            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status = APPROVED`, (err, result) => {
+        try{
+            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
+                if (err) throw err;
                 res.json(result);
             });
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Could not get approved words"
+            })
         }
     });
     
     router.post('/api/admin', (req, res) => {
-        let permission = validate(req.body.token);
-        if (permission) {
-            if (permission.Permissions == "ADMIN") {
-                connection.query(`SELECT WordID, Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status = PENDING`, (err, result) => {
+        try {
+            let permission = validate(req.body.token);
+            if (permission) {
+                if (permission.Permissions == "ADMIN") {
+                    connection.query(`SELECT WordID, Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='PENDING'`, (err, result) => {
+                        if (err) throw err;
+                        res.json(result);
+                    });
+                }
+            }
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Could not get pending words."
+            })
+        }
+    });
+    
+    router.post('/api/profile', (req, res) => {
+        try {
+            let permission = validate(req.body.token);
+            if (permission) {
+                if (req.body.operation == "GET") {
+                    connection.query(`SELECT FullName, Email FROM User WHERE UserID=${permission.UserID}`, (err, result) => {
+                        if (err) throw err;
+                        res.json(result);
+                    });
+                } else if (req.body.operation == "UPDATE") {
+                    connection.query(`UPDATE User SET FullName='${req.body.FullName}', Email='${req.body.Email}' WHERE UserID=${permission.UserID}`, (err, result) => {
+                        if (err) throw err;
+                        res.json({
+                            message: "Updated user successfully"
+                        });
+                    });
+                }
+            } else {
+                res.status(500);
+                res.json({
+                    message: "User must be logged in"
+                })
+            }
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Could not get or update user profile"
+            })
+        }
+    });
+
+    router.post('/api/createNewList', (req, res) => {
+        try {
+            let permission = validate(req.body.token);
+            if (permission) {
+                connection.query(`INSERT INTO List (ListID, UserID, ListName) VALUES (UUID(), '${permission.UserID}', '${req.body.ListName}')`, (err, result) => {
+                    if (err) throw err;
+                    res.json({
+                        message: "List successfully created"
+                    })
+                })
+            }
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Unable to create new list."
+            })
+        }
+    });
+
+    router.post('/api/modifyPendingWord', (req, res) => {
+        try {
+            let permission = validate(req.body.token);
+            if (permission) {
+                if (permission.Permissions == "ADMIN") {
+                    if (req.body.operation == "APPROVE") {
+                        connection.query(`UPDATE Word SET Status=APPROVED WHERE WordID='${req.body.WordID}'`, (err, result) => {
+                            if (err) throw err;
+                            res.json({
+                                message: "Word successfully updated."
+                            });
+                        });
+                    } else if (req.body.operation == "DENY") {
+                        connection.query(`DELETE FROM Word WHERE WordID=${req.body.WordID}`, (err, result) => {
+                            if (err) throw err;
+                            res.json({
+                                message: "Word successfully deleted."
+                            });
+                        });
+                    } else if (req.body.operation == "UPDATE") {
+                        connection.query(`UPDATE Word SET Word='${req.body.Word}', PlainDef='${req.body.PlainDef}', TechDef='${req.body.TechDef}', VideoLink='${req.body.VideoLink}', Status='${req.body.Status}' WHERE WordID='${req.body.WordID}'`, (err, result) => {
+                            if (err) throw err;
+                            res.json({
+                                message: "Word updated successfully"
+                            })
+                        });
+                    }
+                }
+            }
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Word unable to be updated"
+            })
+        }
+    });
+
+    router.post('/api/addWord', (req, res) => {
+        try {
+            let permission = validate(req.body.token);
+            if (permission) {
+                connection.query(`INSERT INTO Word (WordID, UserID, Word, PlainDef, TechDef, VideoLink) VALUES (UUID(), '${permission.UserID}', '${req.body.Word}', '${req.body.PlainDef}', '${req.body.TechDef}', '${req.body.VideoLink}')`, (err, result) => {
+                    if (err) throw err;
+                    res.json({
+                        message: "Successfully added word to pending list."
+                    });
+                });
+            }
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Word unable to be Aadded"
+            })
+        }
+    });
+
+    router.post('/api/getUserLists', (req, res) => {
+        try {
+            let permission = validate(req.body.token);
+            if (permission) {
+                connection.query(`SELECT ListID, ListName FROM List WHERE UserID=${permission.UserID}`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });
             }
+            
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Unable to get user's lists"
+            });
         }
-    })
-    
-    router.post('/api/settings', (req, res) => {
-        let permission = validate(req.body.token);
-        if (permission) {
-            //Update user data
+    });
+
+    router.get('/api/searchLibrary', (req, res) => {
+        try {
+            if (req.query.SearchTerm == "" || req.query.SearchTerm == undefined) {
+                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
+                    if (err) throw err;
+                    res.json(result);
+                });
+            } else {
+                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '${req.query.SearchTerm}'`, (err, result) => {
+                    if (err) throw err;
+                    res.json(result);
+                });
+            }
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Unable to complete search"
+            })
         }
     });
     
@@ -125,8 +343,8 @@ module.exports = (router) => {
         try {
             let response = jwt.verify(token, secretKey);
             return {
-                permissions: response.Permissions,
-                id: response.UserID
+                Permissions: response.Permissions,
+                UserID: response.UserID
             };
         } catch {
             return "Validation failed";

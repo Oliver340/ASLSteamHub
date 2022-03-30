@@ -57,3 +57,7 @@ iframe {
     align-items: center;
     justify-content: center;
 }
+
+#backIcon {
+    visibility: hidden;
+}
