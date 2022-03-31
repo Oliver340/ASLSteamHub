@@ -13,8 +13,8 @@ updateProfileForm.addEventListener("submit", (e) => {
     if (updateProfileForm.fullName.value != user.fullName) {
         user.fullName = updateProfileForm.fullName.value;
     }
-    if (updateProfileForm.email.value != user.email) {
-        user.email = updateProfileForm.email.value;
+    if (updateProfileForm.emailEntry.value != user.email) {
+        user.email = updateProfileForm.emailEntry.value;
     }
     sendPassword(user.fullName, user.email);
 })
@@ -30,7 +30,7 @@ xhttp.onreadystatechange = function() {
                 let name = element.FullName;
                 let email = element.Email;
                 updateProfileForm.fullName.value = name;
-                updateProfileForm.email.value = email;
+                updateProfileForm.emailEntry.value = email;
             });
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);

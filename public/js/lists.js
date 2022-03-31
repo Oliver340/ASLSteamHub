@@ -36,10 +36,11 @@
 const listContainer = document.getElementById("listContainer");
 
 //Function loads list to page
-let updateLists = (listName) => {
+let updateLists = (listName, listID) => {
     let element = document.createElement("div");
     element.className = "lists";
     element.textContent = listName;
+    element.id = listID;
 
     let image = document.createElement("img");
     image.id = "mailIcon";
@@ -54,7 +55,7 @@ let updateLists = (listName) => {
     image2.id = "editIcon";
     image2.src = "../images/editicon.png";
     image2.alt = "editIcon";
-    image2.onclick = function() {location.href='editList.html';};
+    image2.onclick = function() {location.href=`editList?listID=${listID}`;};
 
     element.append(image2);
 
@@ -71,7 +72,7 @@ xhttp.onreadystatechange = function() {
             let jsonData = JSON.parse(xhttp.response);
             jsonData.forEach(element => {
                 let listName = element.ListName;
-                updateLists(listName);
+                updateLists(listName, element.ListID);
             });
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);

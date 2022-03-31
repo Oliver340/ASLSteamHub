@@ -79,14 +79,15 @@ module.exports = (router) => {
         }
     });
 
-    router.get('/api/getList/:ListID', (req, res) => {
+    router.get('/api/getList', (req, res) => {
         try {
-            connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, List.ListName
+            connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, List.ListName, Word.WordID
                 FROM Word 
                 LEFT JOIN LinkedList ON Word.WordID = LinkedList.WordID
                 LEFT JOIN List ON List.ListID = LinkedList.ListID
-                WHERE List.ListID='${req.params.ListID}'`, (err, result) => {
+                WHERE List.ListID='${req.query.listID}'`, (err, result) => {
                         if (err) throw err;
+
                         res.json(result);
                     });
         } catch (e) {
@@ -105,13 +106,14 @@ module.exports = (router) => {
                     connection.query(`INSERT INTO LinkedList (ListID, WordID) VALUES ('${req.body.ListID}', '${req.body.WordID}')`, (err, response) => {
                         try {
                             if (err) throw err;
+                            res.status(201);
                             res.json({
                                 message: "Word added successfully"
                             });
-                        } catch {
+                        } catch (e) {
                             res.status(500);
                             res.json({
-                                message: "Could not update database"
+                                message: e.message
                             });
                         }
                     });
@@ -120,6 +122,7 @@ module.exports = (router) => {
                     connection.query(`DELETE FROM LinkedList WHERE WordID='${req.body.WordID}' AND ListID='${req.body.ListID}'`, (err, response) => {
                         try {
                             if (err) throw err;
+                            res.status(201);
                             res.json({
                                 message: "Word deleted successfully"
                             });
@@ -135,6 +138,7 @@ module.exports = (router) => {
                     connection.query(`UPDATE List SET ListName='${req.body.ListName}' WHERE ListID='${req.body.ListID}'`, (err, response) => {
                         try {
                             if (err) throw err;
+                            res.status(201);
                             res.json({
                                 message: "List updated successfully"
                             });
@@ -161,10 +165,20 @@ module.exports = (router) => {
     
     router.get('/api/library', (req, res) => {
         try{
-            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
-                if (err) throw err;
-                res.json(result);
-            });
+            if (req.query.listID) {
+                connection.query(`SELECT Word.Word, Word.PlainDef, Word.TechDef, Word.VideoLink, Word.WordID
+                FROM Word
+                WHERE Word.Status='APPROVED' AND WordID NOT IN (
+                SELECT WordID FROM linkedlist WHERE ListID = '${req.query.listID}')`, (err, result) => {
+                    if (err) throw err;
+                    res.json(result);
+                });
+            } else {
+                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink, WordID FROM Word WHERE Status='APPROVED'`, (err, result) => {
+                    if (err) throw err;
+                    res.json(result);
+                });
+            }
         } catch (e) {
             res.status(500);
             res.json({
@@ -230,9 +244,12 @@ module.exports = (router) => {
             if (permission) {
                 connection.query(`INSERT INTO List (ListID, UserID, ListName) VALUES (UUID(), '${permission.UserID}', '${req.body.ListName}')`, (err, result) => {
                     if (err) throw err;
-                    res.json({
-                        message: "List successfully created"
-                    })
+                    connection.query(`SELECT ListID FROM List WHERE CreationDate=(SELECT MAX(CreationDate) FROM List)`, (err, result) => {
+                        res.json([{
+                            ListName: req.body.ListName,
+                            ListID: result[0].ListID
+                        }]);
+                    });
                 })
             }
         } catch (e) {

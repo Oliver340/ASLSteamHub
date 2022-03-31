@@ -1,6 +1,16 @@
+//Get the parameters for the get requests to use them in other places
+let url = window.location.search;
+let query = url.split('?')[1];
+let value = null;
+console.log(query);
+if (query) {
+    value = query.split('=');
+}
+
+const endPointEditList = "http://localhost:32535/api/editList";
 
 // Function to add a word to the page
-let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
+let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
 
     let wordContainer = document.createElement("div");
     let headerElement = document.createElement("h2");
@@ -12,12 +22,22 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
     let sd = document.createElement("p");
 
     wordContainer.className = "wordContainer";
+    wordContainer.id = wordID;
     headerElement.id = word.toLowerCase();
     headerElement.textContent = word;
-    addIcon.className = "addIcon";
-    addIcon.src = "../images/addtofoldericon.png";
-    addIcon.alt = "addIcon";
-    headerElement.appendChild(addIcon);
+    if (localStorage.getItem("aslsteamhubtoken") != "") {
+        if (value) {
+            addIcon.className = "addIcon";
+            addIcon.src = "../images/addtofoldericon.png";
+            addIcon.alt = "addIcon";
+            addIcon.addEventListener("click", (e) => {
+                xhttp.open("POST", endPointEditList, true);
+                xhttp.setRequestHeader("Content-Type", "application/JSON");
+                xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: "ADD", WordID: wordID, ListID: value[1] }));
+            });
+            headerElement.appendChild(addIcon);
+        }
+    }
     videoElement.src = url;
     hpd.textContent = "Plain Definition";
     hsd.textContent = "Scientific Definition";
@@ -33,7 +53,6 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef) => {
     wordContainer.appendChild(hsd);
     wordContainer.appendChild(sd);
 
-    parentElement.innerHTML = '';
     parentElement.appendChild(wordContainer);
 
 }
@@ -67,9 +86,12 @@ xhttp.onreadystatechange = function() {
                 let plainDef = element.PlainDef;
                 let sciDef = element.TechDef;
                 let url = element.VideoLink;
+                let wordID = element.WordID;
                 url = convertLinkToEmbed(url);
-                addWordToLibrary(libraryContainer, word, url, plainDef, sciDef);
+                addWordToLibrary(libraryContainer, word, url, plainDef, sciDef, wordID);
             });
+        } else if (xhttp.status == 201) {
+            alert("List updated successfully!");
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
             libraryContainer.innerHTML = jsonData.message;
@@ -79,7 +101,11 @@ xhttp.onreadystatechange = function() {
 
 // Sends get req
 const getWords = function() {
-    xhttp.open("GET", endPoint, true);
+    if (value) {
+        xhttp.open("GET", endPoint + "?" + query, true);
+    } else {
+        xhttp.open("GET", endPoint, true);
+    }
     xhttp.send();
 }();
 

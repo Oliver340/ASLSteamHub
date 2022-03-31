@@ -1,5 +1,17 @@
+//Get the parameters for the get requests to use them in other places
+let url = window.location.search;
+let query = url.split('?')[1];
+document.querySelector("#addWord").addEventListener("click", (e) => {
+    window.location.href = "library?" + query;
+});
+document.querySelector("#updateList").addEventListener("click", (e) => {
+    e.preventDefault();
+    let ListID = query.split("=")[1];
+    editList("UPDATE", null, ListID, document.querySelector("#listName").value);
+});
+
 // Function to add a word to the page with delete icon
-let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
+let addWordToList = (parentElement, word, url, plainDef, sciDef, wordID) => {
 
     let wordContainer = document.createElement("div");
     let headerElement = document.createElement("h2");
@@ -33,7 +45,6 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
     wordContainer.appendChild(hsd);
     wordContainer.appendChild(sd);
 
-    parentElement.innerHTML = '';
     parentElement.appendChild(wordContainer);
 
 }
@@ -62,6 +73,7 @@ xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
             let jsonData = JSON.parse(xhttp.response);
+            document.querySelector("#listName").value = jsonData[0].ListName;
             jsonData.forEach(element => {
                 let word = element.Word;
                 let plainDef = element.PlainDef;
@@ -69,8 +81,19 @@ xhttp.onreadystatechange = function() {
                 let url = element.VideoLink;
                 let wordID = element.WordID;
                 url = convertLinkToEmbed(url);
-                addWordToLibrary(listContainer, word, url, plainDef, sciDef, wordID);
+                addWordToList(listContainer, word, url, plainDef, sciDef, wordID);
             });
+            document.querySelectorAll(".deleteIcon").forEach(element => {
+                element.addEventListener("click", () => {
+                    let wordID = element.parentElement.parentElement.id;
+                    let ListID = query.split("=")[1];
+                    editList("DELETE", wordID, ListID, document.querySelector("#listName").value);
+                    element.parentElement.parentElement.parentElement.removeChild(element.parentElement.parentElement);
+                });
+            });
+        } else if (xhttp.status == 201) {
+            let response = JSON.parse(xhttp.response);
+            console.log(response.message);
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
             listContainer.innerHTML = jsonData.message;
@@ -80,19 +103,14 @@ xhttp.onreadystatechange = function() {
 
 // Sends get req
 const getWords = function() {
-    xhttp.open("GET", endPointGetList, true);
+    xhttp.open("GET", endPointGetList + "?" + query, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ }));
+    xhttp.send();
 }();
 
-document.getElementById("deleteIcon").addEventListener("click", () => {
-    let wordID = this.parentElement.parentElement.id;
-    reviewWord("DELETE", wordID);
-});
-
 // Edits list
-const editList = function(operation) {
+const editList = function(operation, wordID, listID, listName) {
     xhttp.open("POST", endPointEditList, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: operation, WordID: wordID}));
+    xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken"), operation: operation, WordID: wordID, ListID: listID, ListName: listName }));
 };
