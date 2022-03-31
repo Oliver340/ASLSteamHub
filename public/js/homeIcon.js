@@ -1,3 +1,3 @@
 function logoClick() {
-    window.location = "../html/home.html";
+    window.location = "https://aslsteamhub.commons.bcit.ca/";
 }

@@ -18,7 +18,7 @@ wordSubmissionContainer.addEventListener("submit", (e) => {
 })
 
 const xhttp = new XMLHttpRequest();
-const endPoint = "http://localhost:32535/api/addWord";
+const endPoint = "https://aslsteamhub.commons.bcit.ca/api/addWord";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {

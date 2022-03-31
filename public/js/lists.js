@@ -63,8 +63,8 @@ let updateLists = (listName, listID) => {
 }
 
 const xhttp = new XMLHttpRequest();
-const endPointGetLists = "http://localhost:32535/api/getUserLists";
-const endPointPostList = "http://localhost:32535/api/createNewList";
+const endPointGetLists = "https://aslsteamhub.commons.bcit.ca/api/getUserLists";
+const endPointPostList = "https://aslsteamhub.commons.bcit.ca/api/createNewList";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
