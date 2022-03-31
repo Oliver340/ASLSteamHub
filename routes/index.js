@@ -54,4 +54,8 @@ module.exports = (router) => {
     router.get('/sendList', (req, res) => {
         res.render('sendList')
     })
+
+    router.get('/viewList', (req, res) => {
+        res.render('viewList')
+    })
 };

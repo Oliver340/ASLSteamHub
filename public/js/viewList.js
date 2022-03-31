@@ -85,6 +85,10 @@ xhttp.onreadystatechange = function() {
     }
 };
 
+document.getElementById("mailIcon").addEventListener("click", (e) => {
+    window.location.href="/sendList?" + query;
+})
+
 // Sends get req
 const getWords = function() {
     xhttp.open("GET", endPointGetList + "?" + query, true);
