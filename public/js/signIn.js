@@ -6,7 +6,7 @@ loginForm.addEventListener("submit", (e) => {
 })
 
 const xhttp = new XMLHttpRequest();
-const endPoint = "http://localhost:32535/api/signIn";
+const endPoint = "https://aslsteamhub.commons.bcit.ca/api/signIn";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
