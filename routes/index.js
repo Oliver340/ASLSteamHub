@@ -47,8 +47,8 @@ module.exports = (router) => {
         res.render('FAQ');
     });
     
-    router.get('/profile', (req, res) => {
-        res.render('profile')
+    router.get('/settings', (req, res) => {
+        res.render('setting')
     })
 
     router.get('/sendList', (req, res) => {
