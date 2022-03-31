@@ -1,0 +1,25 @@
+// Page where a user can view another user's list.
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title View List
+  link(rel='stylesheet' href='../css/general.css')
+  link(rel='stylesheet' href='../css/editList.css')
+header
+  image#logo(src='../images/logo.png' alt='logoImage')
+  image#homeIcon(src='../images/homeicon.png' alt='homeIcon' onclick='logoClick()')
+h1
+  image#backIcon(src='../images/backicon.png' alt='backIcon' onclick='history.back()')
+//
+  <form>
+  <label for="listName">List Name: </label>
+  <input type="text" id="listName" name="listName">
+  <label for="updateList">Update List</label>
+  <input type="submit" id="updateList">
+  <image id="mailIcon" src="../images/mailicon.png" alt="mailIcon" onclick = "location.href='sendList.html';"></image>
+  </form>
+#listContainer
+  // <button id="addWord">+ Add Word to List</button>
+script(src='../js/homeIcon.js')
+script(src='../js/viewList.js')
