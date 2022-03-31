@@ -213,7 +213,7 @@ module.exports = (router) => {
                 if (req.body.operation == "GET") {
                     connection.query(`SELECT FullName, Email FROM User WHERE UserID='${permission.UserID}'`, (err, result) => {
                         if (err) throw err;
-                        res.json(result);
+                        res.json(result[0]);
                     });
                 } else if (req.body.operation == "UPDATE") {
                     connection.query(`UPDATE User SET FullName='${req.body.FullName}', Email='${req.body.Email}' WHERE UserID='${permission.UserID}'`, (err, result) => {

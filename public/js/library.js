@@ -74,8 +74,8 @@ let convertLinkToEmbed = (ytURL) => {
 
 const libraryContainer = document.getElementById("libraryContainer");
 const xhttp = new XMLHttpRequest();
-const endPoint = "http://localhost:32535/api/library";
-const endPointSearch = "http://localhost:32535/api/searchLibrary";
+const endPoint = "https://aslsteamhub.commons.bcit.ca/api/library";
+const endPointSearch = "https://aslsteamhub.commons.bcit.ca/api/searchLibrary";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {

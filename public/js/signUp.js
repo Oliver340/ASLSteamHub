@@ -8,14 +8,14 @@ signUpForm.addEventListener("submit", (e) => {
 })
 
 const xhttp = new XMLHttpRequest();
-const endPoint = "http://localhost:32535/api/signup";
+const endPoint = "https://aslsteamhub.commons.bcit.ca/api/signup";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
             let jsonData = JSON.parse(xhttp.response);
-            window.location.href = "home.html";
             localStorage.setItem('aslsteamhubtoken', jsonData.token);
+            window.location.href = "home.html";
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
             document.getElementById("signUpContainer").innerHTML = jsonData.message;
