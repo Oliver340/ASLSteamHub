@@ -50,4 +50,8 @@ module.exports = (router) => {
     router.get('/profile', (req, res) => {
         res.render('profile')
     })
+
+    router.get('/sendList', (req, res) => {
+        res.render('sendList')
+    })
 };
