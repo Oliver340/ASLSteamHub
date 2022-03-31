@@ -15,9 +15,9 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
     wordContainer.id = wordID;
     headerElement.id = word.toLowerCase();
     headerElement.textContent = word;
-    acceptIcon.id = "accept";
+    acceptIcon.className = "accept";
     acceptIcon.textContent = "Accept";
-    rejectIcon.id = "reject";
+    rejectIcon.className = "reject";
     rejectIcon.textContent = "Reject";
     headerElement.appendChild(acceptIcon);
     headerElement.appendChild(rejectIcon);
@@ -36,7 +36,6 @@ let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
     wordContainer.appendChild(hsd);
     wordContainer.appendChild(sd);
 
-    parentElement.innerHTML = '';
     parentElement.appendChild(wordContainer);
 
 }
@@ -74,6 +73,27 @@ xhttp.onreadystatechange = function() {
                 url = convertLinkToEmbed(url);
                 addWordToLibrary(listContainer, word, url, plainDef, sciDef, wordID);
             });
+
+            console.log(document.querySelectorAll(".accept"));
+
+            document.querySelectorAll(".accept").forEach(element => {
+                console.log("A");
+                element.addEventListener("click", () => {
+                    let wordID = element.parentElement.parentElement.id;
+                    reviewWord("APPROVE", wordID);
+                    element.parentElement.parentElement.parentElement.removeChild(element.parentElement.parentElement);
+                });
+            });
+
+            document.querySelectorAll(".reject").forEach(element => {
+                element.addEventListener("click", () => {
+                    let wordID = element.parentElement.parentElement.id;
+                    reviewWord("DENY", wordID);
+                    element.parentElement.parentElement.parentElement.removeChild(element.parentElement.parentElement);
+                });
+            });
+        } else if (xhttp.status == 202) {
+            getWords();
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
             listContainer.innerHTML = jsonData.message;
@@ -87,16 +107,6 @@ const getWords = function() {
     xhttp.setRequestHeader("Content-Type", "application/JSON");
     xhttp.send(JSON.stringify({ token: localStorage.getItem("aslsteamhubtoken")}));
 }();
-
-document.getElementById("accept").addEventListener("click", () => {
-    let wordID = this.parentElement.parentElement.id;
-    reviewWord("APPROVE", wordID);
-});
-
-document.getElementById("reject").addEventListener("click", () => {
-    let wordID = this.parentElement.parentElement.id;
-    reviewWord("DENY", wordID);
-});
 
 // Accepts or rejects word
 const reviewWord = function(decision, wordID) {

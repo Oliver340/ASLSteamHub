@@ -266,8 +266,9 @@ module.exports = (router) => {
             if (permission) {
                 if (permission.Permissions == "ADMIN") {
                     if (req.body.operation == "APPROVE") {
-                        connection.query(`UPDATE Word SET Status=APPROVED WHERE WordID='${req.body.WordID}'`, (err, result) => {
+                        connection.query(`UPDATE Word SET Status='APPROVED' WHERE WordID='${req.body.WordID}'`, (err, result) => {
                             if (err) throw err;
+                            res.status(201);
                             res.json({
                                 message: "Word successfully updated."
                             });
@@ -275,6 +276,7 @@ module.exports = (router) => {
                     } else if (req.body.operation == "DENY") {
                         connection.query(`DELETE FROM Word WHERE WordID='${req.body.WordID}'`, (err, result) => {
                             if (err) throw err;
+                            res.status(201);
                             res.json({
                                 message: "Word successfully deleted."
                             });
@@ -282,6 +284,7 @@ module.exports = (router) => {
                     } else if (req.body.operation == "UPDATE") {
                         connection.query(`UPDATE Word SET Word='${req.body.Word}', PlainDef='${req.body.PlainDef}', TechDef='${req.body.TechDef}', VideoLink='${req.body.VideoLink}', Status='${req.body.Status}' WHERE WordID='${req.body.WordID}'`, (err, result) => {
                             if (err) throw err;
+                            res.status(202);
                             res.json({
                                 message: "Word updated successfully"
                             })
