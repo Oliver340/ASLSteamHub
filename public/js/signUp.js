@@ -14,8 +14,8 @@ xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
             let jsonData = JSON.parse(xhttp.response);
-            window.location.href = "home.html";
             localStorage.setItem('aslsteamhubtoken', jsonData.token);
+            window.location.href = "home.html";
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
             document.getElementById("signUpContainer").innerHTML = jsonData.message;

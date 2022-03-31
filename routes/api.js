@@ -33,8 +33,8 @@ module.exports = (router) => {
                         if (err) throw err;
                         res.json({
                             token: jwt.sign({
-                                Permissions: resp.Permissions,
-                                UserID: resp.UserID
+                                Permissions: resp[0].Permissions,
+                                UserID: resp[0].UserID
                             }, secretKey, {
                                 expiresIn: "12h",
                             })
