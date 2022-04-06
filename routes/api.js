@@ -340,17 +340,25 @@ module.exports = (router) => {
 
     router.get('/api/searchLibrary/:SearchTerm', (req, res) => {
         try {
-            if (req.params.SearchTerm == "" || req.params.SearchTerm == undefined) {
-                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
-                    if (err) throw err;
-                    res.json(result);
-                });
-            } else {
-                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '%${req.params.SearchTerm}%'`, (err, result) => {
-                    if (err) throw err;
-                    res.json(result);
-                });
-            }
+            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '%${req.params.SearchTerm}%'`, (err, result) => {
+                if (err) throw err;
+                res.json(result);
+            });
+        } catch (e) {
+            res.status(500);
+            res.json({
+                message: "Unable to complete search"
+            })
+        }
+    });
+
+    //Sorry
+    router.get('/api/searchLibrary', (req, res) => {
+        try {
+            connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED'`, (err, result) => {
+                if (err) throw err;
+                res.json(result);
+            });
         } catch (e) {
             res.status(500);
             res.json({

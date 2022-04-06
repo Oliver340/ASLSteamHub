@@ -9,6 +9,9 @@ document.querySelector("#updateList").addEventListener("click", (e) => {
     let ListID = query.split("=")[1];
     editList("UPDATE", null, ListID, document.querySelector("#listName").value);
 });
+document.querySelector("#mailIcon").addEventListener("click", (e) => {
+    window.location.href = "sendList?" + query;
+})
 
 // Function to add a word to the page with delete icon
 let addWordToList = (parentElement, word, url, plainDef, sciDef, wordID) => {

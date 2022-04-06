@@ -15,9 +15,8 @@ h1
 form
   label(for='listName') List Name: 
   input#listName(type='text' name='listName')
-  label(for='updateList') Update List
-  input#updateList(type='submit')
-  image#mailIcon(src='../images/mailicon.png' alt='mailIcon' onclick="location.href='/sendList';")
+  input#updateList(type='submit' value="Update List")
+  image#mailIcon(src='../images/mailicon.png' alt='mailIcon')
 #listContainer
   button#addWord + Add Word to List
 script(src='../js/homeIcon.js')

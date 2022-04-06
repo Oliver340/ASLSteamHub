@@ -1,13 +1,13 @@
 //Get the parameters for the get requests to use them in other places
 let url = window.location.search;
 let query = url.split('?')[1];
+console.log(query);
 
 // Function to add a word to the page with delete icon
 let addWordToList = (parentElement, word, url, plainDef, sciDef, wordID) => {
 
     let wordContainer = document.createElement("div");
     let headerElement = document.createElement("h2");
-    let deleteIcon = document.createElement("img");
     let videoElement = document.createElement("iframe");
     let hpd = document.createElement("h4");
     let hsd = document.createElement("h4");
@@ -18,10 +18,6 @@ let addWordToList = (parentElement, word, url, plainDef, sciDef, wordID) => {
     wordContainer.id = wordID;
     headerElement.id = word.toLowerCase();
     headerElement.textContent = word;
-    deleteIcon.className = "deleteIcon";
-    deleteIcon.src = "../images/deleteicon.png";
-    deleteIcon.alt = "deleteIcon";
-    headerElement.appendChild(deleteIcon);
     videoElement.src = url;
     hpd.textContent = "Plain Definition";
     hsd.textContent = "Scientific Definition";
@@ -65,7 +61,10 @@ xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
             let jsonData = JSON.parse(xhttp.response);
-            document.getElementsByTagName("h1").appendChild(jsonData[0].ListName);
+            let elem = document.querySelector("#backIcon");
+            elem.style.visibility = "hidden";
+            document.querySelector("#ListTitle").innerHTML = jsonData[0].ListName;
+            document.querySelector("#ListTitle").prepend(elem);
             jsonData.forEach(element => {
                 let word = element.Word;
                 let plainDef = element.PlainDef;
@@ -85,9 +84,10 @@ xhttp.onreadystatechange = function() {
     }
 };
 
-document.getElementById("mailIcon").addEventListener("click", (e) => {
-    window.location.href="/sendList?" + query;
-})
+//Implement check for if logged in, send home if logged in
+const logoClick = () => {
+    window.location = "/signIn";
+}
 
 // Sends get req
 const getWords = function() {

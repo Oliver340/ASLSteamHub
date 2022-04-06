@@ -81,6 +81,10 @@ xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
             let jsonData = JSON.parse(xhttp.response);
+            //its scuffed yo
+            let elem = document.getElementById('addWord');
+            libraryContainer.innerHTML = "";
+            libraryContainer.appendChild(elem);
             jsonData.forEach(element => {
                 let word = element.Word;
                 let plainDef = element.PlainDef;
@@ -123,7 +127,7 @@ searchButton.onclick = () => {
 
 // Search db
 const searchDB = function(searchTerm) {
-    xhttp.open("GET", endPointSearch, true);
+    xhttp.open("GET", endPointSearch + "/" + searchTerm, true);
     xhttp.setRequestHeader("Content-Type", "application/JSON");
-    xhttp.send(JSON.stringify({ SearchTerm: searchTerm}));
+    xhttp.send();
 };
