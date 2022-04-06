@@ -6,13 +6,13 @@ loginForm.addEventListener("submit", (e) => {
 })
 
 const xhttp = new XMLHttpRequest();
-const endPoint = "localhost:32535/api/signIn";
+const endPoint = "/api/signIn";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
             let jsonData = JSON.parse(xhttp.response);
-            window.location.href = "home.html";
+            window.location.href = "/home";
             localStorage.setItem('aslsteamhubtoken', jsonData.token);
         } else if (xhttp.status == 500) {
             let jsonData = JSON.parse(xhttp.response);
