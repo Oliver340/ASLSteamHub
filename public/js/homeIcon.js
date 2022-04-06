@@ -1,3 +1,3 @@
 function logoClick() {
-    window.location = "localhost:32535/";
+    window.location = "/";
 }
