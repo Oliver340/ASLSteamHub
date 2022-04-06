@@ -315,7 +315,7 @@ module.exports = (router) => {
         } catch (e) {
             res.status(500);
             res.json({
-                message: "Word unable to be Aadded"
+                message: "Word unable to be added"
             })
         }
     });
@@ -346,7 +346,7 @@ module.exports = (router) => {
                     res.json(result);
                 });
             } else {
-                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '${req.params.SearchTerm}'`, (err, result) => {
+                connection.query(`SELECT Word, PlainDef, TechDef, VideoLink FROM Word WHERE Status='APPROVED' AND Word LIKE '%${req.params.SearchTerm}%'`, (err, result) => {
                     if (err) throw err;
                     res.json(result);
                 });
