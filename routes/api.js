@@ -314,7 +314,7 @@ module.exports = (router) => {
         } catch (e) {
             res.status(500);
             res.json({
-                message: "Word unable to be Aadded"
+                message: "Word unable to be added"
             })
         }
     });
