@@ -242,6 +242,7 @@ module.exports = (router) => {
         try {
             let permission = validate(req.body.token);
             if (permission) {
+                console.log(permission);
                 connection.query(`INSERT INTO List (ListID, UserID, ListName) VALUES (UUID(), '${permission.UserID}', '${req.body.ListName}')`, (err, result) => {
                     if (err) throw err;
                     connection.query(`SELECT ListID FROM List WHERE CreationDate=(SELECT MAX(CreationDate) FROM List)`, (err, result) => {

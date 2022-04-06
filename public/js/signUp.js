@@ -8,7 +8,7 @@ signUpForm.addEventListener("submit", (e) => {
 })
 
 const xhttp = new XMLHttpRequest();
-const endPoint = "https://aslsteamhub.commons.bcit.ca/api/signup";
+const endPoint = "localhost:32535/api/signup";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {

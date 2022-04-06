@@ -66,8 +66,8 @@ let convertLinkToEmbed = (ytURL) => {
 
 const listContainer = document.getElementById("listContainer");
 const xhttp = new XMLHttpRequest();
-const endPointGetList = "https://aslsteamhub.commons.bcit.ca/api/getList";
-const endPointEditList = "https://aslsteamhub.commons.bcit.ca/api/editList";
+const endPointGetList = "localhost:32535/api/getList";
+const endPointEditList = "localhost:32535/api/editList";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {

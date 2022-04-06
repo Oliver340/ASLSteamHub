@@ -14,7 +14,7 @@ header
 h1
   image#backIcon(src='../images/backicon.png' alt='backIcon' onclick='history.back()')
   |         Settings
-  button#adminView(onclick="location.href='https://aslsteamhub.commons.bcit.ca/admin'") Admin View
+  button#adminView(onclick="location.href='localhost:32535/admin'") Admin View
 #settingsContainer
   h2 Change your account details
   form#changeProfile
@@ -28,5 +28,5 @@ h1
       <label for="confirmPasswordEntry">Confirm Password:</label>
       <input id="confirmPasswordEntry" type="password" placeholder="Confirm Password">
     input#submitForm(type='submit' value='Save Changes')
-  button#signOut(onclick="location.href='https://aslsteamhub.commons.bcit.ca/signIn'") Log Out
+  button#signOut(onclick="location.href='localhost:32535/signIn'") Log Out
 script(src='../js/homeIcon.js')

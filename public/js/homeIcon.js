@@ -1,3 +1,3 @@
 function logoClick() {
-    window.location = "https://aslsteamhub.commons.bcit.ca/";
+    window.location = "localhost:32535/";
 }
