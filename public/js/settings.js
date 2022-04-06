@@ -20,7 +20,7 @@ updateProfileForm.addEventListener("submit", (e) => {
 })
 
 const xhttp = new XMLHttpRequest();
-const endPoint = "localhost:32535/api/profile";
+const endPoint = "/api/profile";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {

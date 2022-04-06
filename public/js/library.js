@@ -7,7 +7,7 @@ if (query) {
     value = query.split('=');
 }
 
-const endPointEditList = "http://localhost:32535/api/editList";
+const endPointEditList = "/api/editList";
 
 // Function to add a word to the page
 let addWordToLibrary = (parentElement, word, url, plainDef, sciDef, wordID) => {
@@ -74,8 +74,8 @@ let convertLinkToEmbed = (ytURL) => {
 
 const libraryContainer = document.getElementById("libraryContainer");
 const xhttp = new XMLHttpRequest();
-const endPoint = "localhost:32535/api/library";
-const endPointSearch = "localhost:32535/api/searchLibrary";
+const endPoint = "/api/library";
+const endPointSearch = "/api/searchLibrary";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {

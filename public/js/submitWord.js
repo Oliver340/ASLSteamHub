@@ -18,7 +18,7 @@ wordSubmissionContainer.addEventListener("submit", (e) => {
 })
 
 const xhttp = new XMLHttpRequest();
-const endPoint = "localhost:32535/api/addWord";
+const endPoint = "/api/addWord";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {

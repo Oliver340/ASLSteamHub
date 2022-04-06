@@ -6,7 +6,7 @@ loginForm.addEventListener("submit", (e) => {
 })
 
 const xhttp = new XMLHttpRequest();
-const endPoint = "localhost:32535/api/signIn";
+const endPoint = "/api/signIn";
 
 xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4) {
